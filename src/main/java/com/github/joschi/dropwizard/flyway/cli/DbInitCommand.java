@@ -1,4 +1,4 @@
-package com.github.joschi.dropwizard.flyway;
+package com.github.joschi.dropwizard.flyway.cli;
 
 import org.flywaydb.core.Flyway;
 import io.dropwizard.Configuration;
