@@ -2,7 +2,7 @@ Dropwizard Flyway
 =================
 [![Build Status](https://travis-ci.org/joschi/dropwizard-flyway.svg?branch=master)](https://travis-ci.org/joschi/dropwizard-flyway)
 
-`dropwizard-flyway` is a set of commands using [Flyway](http://www.flyway.org/) for database migrations in [Dropwizard](http://www.dropwizard.io/) applications.
+`dropwizard-flyway` is a set of commands using [Flyway](http://www.flywaydb.org/) for database migrations in [Dropwizard](http://www.dropwizard.io/) applications.
 
 
 Usage
