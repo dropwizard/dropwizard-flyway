@@ -1,5 +1,6 @@
 package com.github.joschi.dropwizard.flyway.cli;
 
+import com.github.joschi.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
 import net.sourceforge.argparse4j.inf.Namespace;
@@ -17,8 +18,11 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
     private static final String VALIDATE_ON_MIGRATE = "validateOnMigrate";
     private static final String CLEAN_ON_VALIDATION_ERROR = "cleanOnValidationError";
 
-    public DbMigrateCommand(final DatabaseConfiguration<T> databaseConfiguration, final Class<T> configurationClass) {
-        super("migrate", "Migrates the database.", databaseConfiguration, configurationClass);
+    public DbMigrateCommand(final DatabaseConfiguration<T> databaseConfiguration,
+                            final FlywayConfiguration<T> flywayConfiguration,
+                            final Class<T> configurationClass) {
+        super("migrate", "Migrates the database.",
+                databaseConfiguration, flywayConfiguration, configurationClass);
     }
 
     @Override

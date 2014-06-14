@@ -1,5 +1,6 @@
 package com.github.joschi.dropwizard.flyway.cli;
 
+import com.github.joschi.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
 import net.sourceforge.argparse4j.inf.Namespace;
@@ -13,15 +14,18 @@ public class DbCommand<T extends Configuration> extends AbstractFlywayCommand<T>
     private static final String COMMAND_NAME_ATTR = "subCommand";
     private final SortedMap<String, AbstractFlywayCommand<T>> subCommands = new TreeMap<>();
 
-    public DbCommand(final DatabaseConfiguration<T> configuration, final Class<T> configurationClass) {
-        super("db", "Run database migration tasks", configuration, configurationClass);
+    public DbCommand(final DatabaseConfiguration<T> databaseConfiguration,
+                     final FlywayConfiguration<T> flywayConfiguration,
+                     final Class<T> configurationClass) {
+        super("db", "Run database migration tasks",
+                databaseConfiguration, flywayConfiguration, configurationClass);
 
-        addSubCommand(new DbMigrateCommand<>(configuration, configurationClass));
-        addSubCommand(new DbCleanCommand<>(configuration, configurationClass));
-        addSubCommand(new DbInitCommand<>(configuration, configurationClass));
-        addSubCommand(new DbValidateCommand<>(configuration, configurationClass));
-        addSubCommand(new DbInfoCommand<>(configuration, configurationClass));
-        addSubCommand(new DbRepairCommand<>(configuration, configurationClass));
+        addSubCommand(new DbMigrateCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));
+        addSubCommand(new DbCleanCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));
+        addSubCommand(new DbInitCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));
+        addSubCommand(new DbValidateCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));
+        addSubCommand(new DbInfoCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));
+        addSubCommand(new DbRepairCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));
     }
 
     private void addSubCommand(final AbstractFlywayCommand<T> subCommand) {

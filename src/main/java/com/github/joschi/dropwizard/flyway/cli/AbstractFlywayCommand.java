@@ -1,5 +1,7 @@
 package com.github.joschi.dropwizard.flyway.cli;
 
+import com.github.joschi.dropwizard.flyway.FlywayConfiguration;
+import com.github.joschi.dropwizard.flyway.FlywayFactory;
 import io.dropwizard.Configuration;
 import io.dropwizard.cli.ConfiguredCommand;
 import io.dropwizard.db.DataSourceFactory;
@@ -14,14 +16,17 @@ import org.slf4j.LoggerFactory;
 abstract class AbstractFlywayCommand<T extends Configuration> extends ConfiguredCommand<T> {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractFlywayCommand.class);
     private final DatabaseConfiguration<T> databaseConfiguration;
+    private final FlywayConfiguration<T> flywayConfiguration;
     private final Class<T> configurationClass;
 
     AbstractFlywayCommand(final String name,
                           final String description,
                           final DatabaseConfiguration<T> databaseConfiguration,
+                          final FlywayConfiguration<T> flywayConfiguration,
                           final Class<T> configurationClass) {
         super(name, description);
         this.databaseConfiguration = databaseConfiguration;
+        this.flywayConfiguration = flywayConfiguration;
         this.configurationClass = configurationClass;
     }
 
@@ -32,9 +37,9 @@ abstract class AbstractFlywayCommand<T extends Configuration> extends Configured
 
     @Override
     protected void run(final Bootstrap<T> bootstrap, final Namespace namespace, final T configuration) throws Exception {
-        final DataSourceFactory factory = databaseConfiguration.getDataSourceFactory(configuration);
-        final Flyway flyway = new Flyway();
-        flyway.setDataSource(factory.build(bootstrap.getMetricRegistry(), "Flyway"));
+        final DataSourceFactory datasourceFactory = databaseConfiguration.getDataSourceFactory(configuration);
+        final FlywayFactory flywayFactory = flywayConfiguration.getFlywayFactory(configuration);
+        final Flyway flyway = flywayFactory.build(datasourceFactory.build(bootstrap.getMetricRegistry(), "Flyway"));
 
         try {
             run(namespace, flyway);
