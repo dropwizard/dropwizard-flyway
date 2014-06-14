@@ -17,6 +17,7 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
     private static final String OUT_OF_ORDER = "outOfOrder";
     private static final String VALIDATE_ON_MIGRATE = "validateOnMigrate";
     private static final String CLEAN_ON_VALIDATION_ERROR = "cleanOnValidationError";
+    private static final String INIT_ON_MIGRATE = "initOnMigrate";
 
     public DbMigrateCommand(final DatabaseConfiguration<T> databaseConfiguration,
                             final FlywayConfiguration<T> flywayConfiguration,
@@ -53,6 +54,16 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
                         "Even tough we strongly recommend not to change migration scripts once they have been checked into SCM and run, this provides a way of dealing with this case in a smooth manner. " +
                         "The database will be wiped clean automatically, ensuring that the next migration will bring you back to the state checked into SCM. " +
                         "Warning! Do not enable in production !");
+
+        subparser.addArgument("--" + INIT_ON_MIGRATE)
+                .action(storeTrue())
+                .setDefault(Boolean.FALSE)
+                .dest(INIT_ON_MIGRATE)
+                .help("Whether to automatically call init when migrate is executed against a non-empty schema with no metadata table. " +
+                        "This schema will then be initialized with the initVersion before executing the migrations. " +
+                        "Only migrations above initVersion will then be applied. " +
+                        "This is useful for initial Flyway production deployments on projects with an existing DB. " +
+                        "Be careful when enabling this as it removes the safety net that ensures Flyway does not migrate the wrong database in case of a configuration mistake!");
     }
 
     @Override
@@ -60,6 +71,7 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
         flyway.setOutOfOrder(namespace.getBoolean(OUT_OF_ORDER));
         flyway.setValidateOnMigrate(namespace.getBoolean(VALIDATE_ON_MIGRATE));
         flyway.setCleanOnValidationError(namespace.getBoolean(CLEAN_ON_VALIDATION_ERROR));
+        flyway.setInitOnMigrate(namespace.getBoolean(INIT_ON_MIGRATE));
 
         final int successfulMigrations = flyway.migrate();
         LOG.debug("{} successful migrations applied", successfulMigrations);
