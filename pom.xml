@@ -12,14 +12,14 @@
         <version>7</version>
     </parent>
 
-    <groupId>com.github.joschi</groupId>
+    <groupId>io.dropwizard.modules</groupId>
     <artifactId>dropwizard-flyway</artifactId>
     <version>0.2.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Dropwizard Flyway Bundle</name>
     <description>Addon bundle for Dropwizard to support Flyway for database migrations</description>
-    <url>https://github.com/joschi/dropwizard-flyway</url>
+    <url>https://github.com/dropwizard/dropwizard-flyway</url>
 
     <licenses>
         <license>
@@ -30,25 +30,25 @@
     </licenses>
 
     <scm>
-        <developerConnection>scm:git:git@github.com:joschi/dropwizard-flyway.git</developerConnection>
-        <connection>scm:git:https://github.com/joschi/dropwizard-flyway.git</connection>
-        <url>https://github.com/joschi/dropwizard-flyway</url>
+        <developerConnection>scm:git:git@github.com:dropwizard/dropwizard-flyway.git</developerConnection>
+        <connection>scm:git:https://github.com/dropwizard/dropwizard-flyway.git</connection>
+        <url>https://github.com/dropwizard/dropwizard-flyway</url>
     </scm>
 
     <ciManagement>
         <system>Travis CI</system>
-        <url>https://travis-ci.org/joschi/dropwizard-flyway</url>
+        <url>https://travis-ci.org/dropwizard/dropwizard-flyway</url>
     </ciManagement>
 
     <issueManagement>
         <system>GitHub Issues</system>
-        <url>https://github.com/joschi/dropwizard-flyway/issues</url>
+        <url>https://github.com/dropwizard/dropwizard-flyway/issues</url>
     </issueManagement>
 
     <distributionManagement>
         <site>
             <id>dropwizard-flyway</id>
-            <url>http://joschi.github.io/dropwizard-flyway/${project.version}</url>
+            <url>http://dropwizard.github.io/dropwizard-flyway/${project.version}</url>
         </site>
     </distributionManagement>
 
