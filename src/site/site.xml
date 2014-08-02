@@ -9,7 +9,7 @@
     <custom>
         <fluidoSkin>
             <gitHub>
-                <projectId>joschi/dropwizard-flyway</projectId>
+                <projectId>dropwizard/dropwizard-flyway</projectId>
                 <ribbonOrientation>right</ribbonOrientation>
                 <ribbonColor>red</ribbonColor>
             </gitHub>
