@@ -1,15 +1,15 @@
 Dropwizard Flyway
 =================
-[![Build Status](https://travis-ci.org/joschi/dropwizard-flyway.svg?branch=master)](https://travis-ci.org/joschi/dropwizard-flyway)
-[![Coverage Status](https://img.shields.io/coveralls/joschi/dropwizard-flyway.svg)](https://coveralls.io/r/joschi/dropwizard-flyway)
+[![Build Status](https://travis-ci.org/dropwizard/dropwizard-flyway.svg?branch=master)](https://travis-ci.org/dropwizard/dropwizard-flyway)
+[![Coverage Status](https://img.shields.io/coveralls/dropwizard/dropwizard-flyway.svg)](https://coveralls.io/r/dropwizard/dropwizard-flyway)
 
-`dropwizard-flyway` is a set of commands using [Flyway](http://www.flywaydb.org/) for database migrations in [Dropwizard](http://www.dropwizard.io/) applications.
+`dropwizard-flyway` is a set of commands using [Flyway](http://www.flywaydb.org/) for database migrations in [Dropwizard](http://dropwizard.io/) applications.
 
 
 Usage
 -----
 
-Just add the `FlywayBundle` to your Dropwizard application inside the [`Application#initialize`](https://dropwizard.github.io/dropwizard/0.7.0/dropwizard-core/apidocs/io/dropwizard/Application.html#initialize-io.dropwizard.setup.Bootstrap-) method. 
+Just add the `FlywayBundle` to your Dropwizard application inside the [`Application#initialize`](http://dropwizard.io/0.7.1/dropwizard-core/apidocs/io/dropwizard/Application.html#initialize%28io.dropwizard.setup.Bootstrap%29) method.
 
     @Override
     public void initialize(Bootstrap<MyConfiguration> bootstrap) {
@@ -39,15 +39,15 @@ After that you can use one of the following Flyway commands:
 | `db init`     | Creates and initializes the metadata table (existing database)               |
 | `db repair`   | Repairs the metadata table                                                   |
 
-The [Flyway migrations](http://flywaydb.org/documentation/migration/) must be accessible in the classpath under `db/migration` (or any other path configured with the `locations` parameter, see [FlywayFactory](https://joschi.github.io/dropwizard-flyway/0.2.0/apidocs/com/github/joschi/dropwizard/flyway/FlywayFactory.html)).
+The [Flyway migrations](http://flywaydb.org/documentation/migration/) must be accessible in the classpath under `db/migration` (or any other path configured with the `locations` parameter, see [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/0.7.0-1/apidocs/io/dropwizard/flyway/FlywayFactory.html)).
 
 
 Configuration
 -------------
 
-`dropwizard-flyway` is using the standard [DataSourceFactory](https://dropwizard.github.io/dropwizard/0.7.0/dropwizard-db/apidocs/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](https://dropwizard.github.io/dropwizard/0.7.0/dropwizard-db/) for configuring its [DataSource](http://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html).
+`dropwizard-flyway` is using the standard [DataSourceFactory](http://dropwizard.io/0.7.1/dropwizard-db/apidocs/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](http://dropwizard.io/0.7.1/dropwizard-db/) for configuring its [DataSource](http://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html).
 
-Additionally you can override the following configuration settings of Flyway using [FlywayFactory](https://joschi.github.io/dropwizard-flyway/0.2.0/apidocs/com/github/joschi/dropwizard/flyway/FlywayFactory.html):
+Additionally you can override the following configuration settings of Flyway using [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/0.7.0-1/apidocs/io/dropwizard/flyway/FlywayFactory.html):
 
     flyway:
       # The encoding of SQL migrations. (default: UTF-8) 
@@ -83,16 +83,16 @@ Maven Artifacts
 This project is available on Maven Central. To add it to your project simply add the following dependencies to your `pom.xml`:
 
     <dependency>
-      <groupId>com.github.joschi</groupId>
+      <groupId>io.dropwizard.modules</groupId>
       <artifactId>dropwizard-flyway</artifactId>
-      <version>0.2.0</version>
+      <version>0.7.0-1</version>
     </dependency>
 
 
 Support
 -------
 
-Please file bug reports and feature requests in [GitHub issues](https://github.com/joschi/dropwizard-flyway/issues).
+Please file bug reports and feature requests in [GitHub issues](https://github.com/dropwizard/dropwizard-flyway/issues).
 
 
 License
