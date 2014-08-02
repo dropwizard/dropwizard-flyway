@@ -1,6 +1,6 @@
-package com.github.joschi.dropwizard.flyway.cli;
+package io.dropwizard.flyway.cli;
 
-import com.github.joschi.dropwizard.flyway.FlywayConfiguration;
+import io.dropwizard.flyway.FlywayConfiguration;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.flywaydb.core.Flyway;
 import io.dropwizard.Configuration;

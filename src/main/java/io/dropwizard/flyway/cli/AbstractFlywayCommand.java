@@ -1,7 +1,7 @@
-package com.github.joschi.dropwizard.flyway.cli;
+package io.dropwizard.flyway.cli;
 
-import com.github.joschi.dropwizard.flyway.FlywayConfiguration;
-import com.github.joschi.dropwizard.flyway.FlywayFactory;
+import io.dropwizard.flyway.FlywayConfiguration;
+import io.dropwizard.flyway.FlywayFactory;
 import io.dropwizard.Configuration;
 import io.dropwizard.cli.ConfiguredCommand;
 import io.dropwizard.db.DataSourceFactory;

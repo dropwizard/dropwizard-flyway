@@ -1,4 +1,4 @@
-package com.github.joschi.dropwizard.flyway;
+package io.dropwizard.flyway;
 
 import org.flywaydb.core.Flyway;
 import org.junit.Test;

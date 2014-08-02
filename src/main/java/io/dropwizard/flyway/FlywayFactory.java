@@ -1,4 +1,4 @@
-package com.github.joschi.dropwizard.flyway;
+package io.dropwizard.flyway;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

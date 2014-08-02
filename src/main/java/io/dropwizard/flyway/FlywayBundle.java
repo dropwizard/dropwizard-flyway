@@ -1,6 +1,6 @@
-package com.github.joschi.dropwizard.flyway;
+package io.dropwizard.flyway;
 
-import com.github.joschi.dropwizard.flyway.cli.DbCommand;
+import io.dropwizard.flyway.cli.DbCommand;
 import io.dropwizard.Bundle;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
