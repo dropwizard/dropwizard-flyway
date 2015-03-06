@@ -85,7 +85,7 @@ This project is available on Maven Central. To add it to your project simply add
     <dependency>
       <groupId>io.dropwizard.modules</groupId>
       <artifactId>dropwizard-flyway</artifactId>
-      <version>0.7.0-1</version>
+      <version>0.8.0-1</version>
     </dependency>
 
 
@@ -98,7 +98,7 @@ Please file bug reports and feature requests in [GitHub issues](https://github.c
 License
 -------
 
-Copyright (c) 2014 Jochen Schalanda
+Copyright (c) 2014-2015 Jochen Schalanda
 
 This library is licensed under the Apache License, Version 2.0.
 
