@@ -34,7 +34,6 @@ public class DbCommand<T extends Configuration> extends AbstractFlywayCommand<T>
 
     @Override
     public void configure(final Subparser subparser) {
-        super.configure(subparser);
         for (AbstractFlywayCommand<T> subCommand : subCommands.values()) {
             final Subparser cmdParser = subparser.addSubparsers()
                     .addParser(subCommand.getName())
