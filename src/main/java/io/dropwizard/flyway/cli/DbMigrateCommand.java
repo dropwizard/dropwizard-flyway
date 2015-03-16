@@ -71,7 +71,7 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
         flyway.setOutOfOrder(namespace.getBoolean(OUT_OF_ORDER));
         flyway.setValidateOnMigrate(namespace.getBoolean(VALIDATE_ON_MIGRATE));
         flyway.setCleanOnValidationError(namespace.getBoolean(CLEAN_ON_VALIDATION_ERROR));
-        flyway.setInitOnMigrate(namespace.getBoolean(INIT_ON_MIGRATE));
+        flyway.setBaselineOnMigrate(namespace.getBoolean(INIT_ON_MIGRATE));
 
         final int successfulMigrations = flyway.migrate();
         LOG.debug("{} successful migrations applied", successfulMigrations);

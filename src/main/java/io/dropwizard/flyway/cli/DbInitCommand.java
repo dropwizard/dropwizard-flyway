@@ -16,6 +16,6 @@ public class DbInitCommand<T extends Configuration> extends AbstractFlywayComman
 
     @Override
     protected void run(final Namespace namespace, final Flyway flyway) throws Exception {
-        flyway.init();
+        flyway.baseline();
     }
 }
