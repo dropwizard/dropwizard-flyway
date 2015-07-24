@@ -176,12 +176,12 @@ public class FlywayFactory {
         flyway.setSqlMigrationSeparator(sqlMigrationSeparator);
         flyway.setSqlMigrationSuffix(sqlMigrationSuffix);
         flyway.setSchemas(schemas.toArray(fwSchemas));
-        flyway.setCallbacks(callbacks.toArray(fwCallbacks));
+        flyway.setCallbacksAsClassNames(callbacks.toArray(fwCallbacks));
         flyway.setPlaceholderPrefix(placeholderPrefix);
         flyway.setPlaceholderSuffix(placeholderSuffix);
         flyway.setPlaceholders(placeholders);
         flyway.setLocations(locations.toArray(fwLocations));
-        flyway.setResolvers(resolvers.toArray(fwResolvers));
+        flyway.setResolversAsClassNames(resolvers.toArray(fwResolvers));
 
         return flyway;
     }
