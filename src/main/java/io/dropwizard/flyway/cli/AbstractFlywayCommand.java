@@ -4,7 +4,7 @@ import io.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.flyway.FlywayFactory;
 import io.dropwizard.Configuration;
 import io.dropwizard.cli.ConfiguredCommand;
-import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.db.DatabaseConfiguration;
 import io.dropwizard.setup.Bootstrap;
 import net.sourceforge.argparse4j.inf.Namespace;
@@ -37,7 +37,7 @@ abstract class AbstractFlywayCommand<T extends Configuration> extends Configured
 
     @Override
     protected void run(final Bootstrap<T> bootstrap, final Namespace namespace, final T configuration) throws Exception {
-        final DataSourceFactory datasourceFactory = databaseConfiguration.getDataSourceFactory(configuration);
+        final PooledDataSourceFactory datasourceFactory = databaseConfiguration.getDataSourceFactory(configuration);
         final FlywayFactory flywayFactory = flywayConfiguration.getFlywayFactory(configuration);
         final Flyway flyway = flywayFactory.build(datasourceFactory.build(bootstrap.getMetricRegistry(), "Flyway"));
 
