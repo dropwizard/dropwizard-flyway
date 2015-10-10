@@ -22,7 +22,7 @@ public class DbCommand<T extends Configuration> extends AbstractFlywayCommand<T>
 
         addSubCommand(new DbMigrateCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));
         addSubCommand(new DbCleanCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));
-        addSubCommand(new DbInitCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));
+        addSubCommand(new DbBaselineCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));
         addSubCommand(new DbValidateCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));
         addSubCommand(new DbInfoCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));
         addSubCommand(new DbRepairCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));

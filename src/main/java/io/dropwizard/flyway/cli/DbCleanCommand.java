@@ -1,5 +1,6 @@
 package io.dropwizard.flyway.cli;
 
+import io.dropwizard.flyway.FlywayCommand;
 import io.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
@@ -10,8 +11,7 @@ public class DbCleanCommand<T extends Configuration> extends AbstractFlywayComma
     public DbCleanCommand(final DatabaseConfiguration<T> databaseConfiguration,
                           final FlywayConfiguration<T> flywayConfiguration,
                           final Class<T> configurationClass) {
-        super("clean", "Drops all objects in the configured schemas.",
-                databaseConfiguration, flywayConfiguration, configurationClass);
+        super(FlywayCommand.CLEAN, databaseConfiguration, flywayConfiguration, configurationClass);
     }
 
     @Override

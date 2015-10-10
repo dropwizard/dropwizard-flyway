@@ -1,5 +1,6 @@
 package io.dropwizard.flyway.cli;
 
+import io.dropwizard.flyway.FlywayCommand;
 import io.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
@@ -10,8 +11,7 @@ public class DbRepairCommand<T extends Configuration> extends AbstractFlywayComm
     public DbRepairCommand(final DatabaseConfiguration<T> databaseConfiguration,
                            final FlywayConfiguration<T> flywayConfiguration,
                            final Class<T> configurationClass) {
-        super("repair", "Repairs the metadata table.",
-                databaseConfiguration, flywayConfiguration, configurationClass);
+        super(FlywayCommand.REPAIR, databaseConfiguration, flywayConfiguration, configurationClass);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package io.dropwizard.flyway.cli;
 
+import io.dropwizard.flyway.FlywayCommand;
 import io.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
@@ -22,8 +23,7 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
     public DbMigrateCommand(final DatabaseConfiguration<T> databaseConfiguration,
                             final FlywayConfiguration<T> flywayConfiguration,
                             final Class<T> configurationClass) {
-        super("migrate", "Migrates the database.",
-                databaseConfiguration, flywayConfiguration, configurationClass);
+        super(FlywayCommand.MIGRATE, databaseConfiguration, flywayConfiguration, configurationClass);
     }
 
     @Override

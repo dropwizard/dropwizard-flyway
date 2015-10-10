@@ -36,7 +36,7 @@ After that you can use one of the following Flyway commands:
 | `db clean`    | Drops all objects in the configured schemas                                  |
 | `db info`     | Prints the details and status information about all the migrations           |
 | `db validate` | Validates the applied migrations against the ones available on the classpath |
-| `db init`     | Creates and initializes the metadata table (existing database)               |
+| `db baseline` | Creates and initializes the metadata table (existing database)               |
 | `db repair`   | Repairs the metadata table                                                   |
 
 The [Flyway migrations](http://flywaydb.org/documentation/migration/) must be accessible in the classpath under `db/migration` (or any other path configured with the `locations` parameter, see [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/0.7.0-1/apidocs/io/dropwizard/flyway/FlywayFactory.html)).

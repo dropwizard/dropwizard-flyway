@@ -1,5 +1,6 @@
 package io.dropwizard.flyway.cli;
 
+import io.dropwizard.flyway.FlywayCommand;
 import io.dropwizard.flyway.FlywayConfiguration;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.flywaydb.core.Flyway;
@@ -17,8 +18,7 @@ public class DbValidateCommand<T extends Configuration> extends AbstractFlywayCo
     public DbValidateCommand(final DatabaseConfiguration<T> databaseConfiguration,
                              final FlywayConfiguration<T> flywayConfiguration,
                              final Class<T> configurationClass) {
-        super("validate", "Validates the applied migrations against the ones available on the classpath.",
-                databaseConfiguration, flywayConfiguration, configurationClass);
+        super(FlywayCommand.VALIDATE, databaseConfiguration, flywayConfiguration, configurationClass);
     }
 
     @Override

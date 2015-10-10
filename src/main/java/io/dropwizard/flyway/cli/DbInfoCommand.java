@@ -1,5 +1,6 @@
 package io.dropwizard.flyway.cli;
 
+import io.dropwizard.flyway.FlywayCommand;
 import io.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
@@ -12,8 +13,7 @@ public class DbInfoCommand<T extends Configuration> extends AbstractFlywayComman
     public DbInfoCommand(final DatabaseConfiguration<T> databaseConfiguration,
                          final FlywayConfiguration<T> flywayConfiguration,
                          final Class<T> configurationClass) {
-        super("info", "Prints the details and status information about all the migrations.",
-                databaseConfiguration, flywayConfiguration, configurationClass);
+        super(FlywayCommand.INFO, databaseConfiguration, flywayConfiguration, configurationClass);
     }
 
     @Override
