@@ -1,5 +1,6 @@
 package io.dropwizard.flyway;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -10,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.CheckForNull;
 import java.util.Arrays;
 import java.util.List;
-import java.util.StringJoiner;
 
 import static org.flywaydb.core.internal.info.MigrationInfoDumper.dumpToAsciiTable;
 
@@ -23,7 +23,6 @@ public final class FlywayCommands {
 
     private static final Logger LOG = LoggerFactory.getLogger(FlywayCommands.class);
 
-    private static final String EMPTY_STRING = "";
     private static final String DEFAULT_DELIM = ",";
     private static final String DEFAULT_JOIN_STRING = DEFAULT_DELIM + " ";
 
@@ -78,11 +77,7 @@ public final class FlywayCommands {
      * @return The resulting string
      */
     public static String to(List<FlywayCommand> flywayCommands) {
-        StringJoiner joiner = new StringJoiner(DEFAULT_JOIN_STRING, EMPTY_STRING, EMPTY_STRING);
-        for (FlywayCommand command : flywayCommands) {
-            joiner.add(command.toString());
-        }
-        return joiner.toString();
+        return Joiner.on(DEFAULT_JOIN_STRING).skipNulls().join(flywayCommands);
     }
 
     /**
