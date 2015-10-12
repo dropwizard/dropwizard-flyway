@@ -1,29 +1,29 @@
 package io.dropwizard.flyway.cli;
 
-import io.dropwizard.flyway.FlywayCommand;
-import io.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
+import io.dropwizard.flyway.FlywayCommand;
+import io.dropwizard.flyway.FlywayCommands;
+import io.dropwizard.flyway.FlywayConfiguration;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.flywaydb.core.Flyway;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static net.sourceforge.argparse4j.impl.Arguments.storeTrue;
 
 public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCommand<T> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DbMigrateCommand.class);
     private static final String OUT_OF_ORDER = "outOfOrder";
     private static final String VALIDATE_ON_MIGRATE = "validateOnMigrate";
     private static final String CLEAN_ON_VALIDATION_ERROR = "cleanOnValidationError";
     private static final String INIT_ON_MIGRATE = "initOnMigrate";
 
+    private static final FlywayCommand COMMAND = FlywayCommand.MIGRATE;
+
     public DbMigrateCommand(final DatabaseConfiguration<T> databaseConfiguration,
                             final FlywayConfiguration<T> flywayConfiguration,
                             final Class<T> configurationClass) {
-        super(FlywayCommand.MIGRATE, databaseConfiguration, flywayConfiguration, configurationClass);
+        super(COMMAND, databaseConfiguration, flywayConfiguration, configurationClass);
     }
 
     @Override
@@ -73,7 +73,6 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
         flyway.setCleanOnValidationError(namespace.getBoolean(CLEAN_ON_VALIDATION_ERROR));
         flyway.setBaselineOnMigrate(namespace.getBoolean(INIT_ON_MIGRATE));
 
-        final int successfulMigrations = flyway.migrate();
-        LOG.debug("{} successful migrations applied", successfulMigrations);
+        FlywayCommands.execute(flyway, COMMAND);
     }
 }
