@@ -8,7 +8,7 @@
 
     <groupId>io.dropwizard.modules</groupId>
     <artifactId>dropwizard-flyway</artifactId>
-    <version>0.8.0-3-SNAPSHOT</version>
+    <version>0.8.0-3</version>
     <packaging>jar</packaging>
 
     <name>Dropwizard Flyway Bundle</name>
