@@ -11,7 +11,7 @@ Dropwizard Flyway
 Usage
 -----
 
-Just add the `FlywayBundle` to your Dropwizard application inside the [`Application#initialize`](http://dropwizard.io/0.8.4/dropwizard-core/apidocs/io/dropwizard/Application.html#initialize%28io.dropwizard.setup.Bootstrap%29) method.
+Just add the `FlywayBundle` to your Dropwizard application inside the [`Application#initialize`](http://dropwizard.io/0.9.0/dropwizard-core/apidocs/io/dropwizard/Application.html#initialize%28io.dropwizard.setup.Bootstrap%29) method.
 
     @Override
     public void initialize(Bootstrap<MyConfiguration> bootstrap) {
@@ -47,7 +47,7 @@ The [Flyway migrations](http://flywaydb.org/documentation/migration/) must be ac
 Configuration
 -------------
 
-`dropwizard-flyway` is using the standard [DataSourceFactory](http://dropwizard.io/0.8.4/dropwizard-db/apidocs/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](http://dropwizard.io/0.8.4/dropwizard-db/) for configuring its [DataSource](http://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html).
+`dropwizard-flyway` is using the standard [DataSourceFactory](http://dropwizard.io/0.9.0/dropwizard-db/apidocs/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](http://dropwizard.io/0.9.0/dropwizard-db/) for configuring its [DataSource](http://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html).
 
 Additionally you can override the following configuration settings of Flyway using [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/0.8.0-3/apidocs/io/dropwizard/flyway/FlywayFactory.html):
 
