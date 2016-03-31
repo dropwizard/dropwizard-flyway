@@ -1,7 +1,7 @@
+sudo: false
 language: java
-install: mvn install -Dgpg.skip=true
 after_success:
-  - mvn jacoco:report coveralls:jacoco
+  - bash .travis_after_success.sh
 jdk:
   - openjdk7
   - oraclejdk7
