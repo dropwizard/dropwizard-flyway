@@ -68,7 +68,7 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
         <dropwizard.version>0.9.0</dropwizard.version>
-        <flyway.version>3.2.1</flyway.version>
+        <flyway.version>4.0.1</flyway.version>
     </properties>
 
     <dependencyManagement>
