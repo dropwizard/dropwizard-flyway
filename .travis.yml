@@ -3,6 +3,4 @@ language: java
 after_success:
   - bash .travis_after_success.sh
 jdk:
-  - openjdk7
-  - oraclejdk7
   - oraclejdk8
