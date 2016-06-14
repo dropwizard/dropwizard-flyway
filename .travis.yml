@@ -1,6 +1,6 @@
 sudo: false
 language: java
 after_success:
-  - bash .travis_after_success.sh
+  - mvn -B jacoco:report coveralls:report
 jdk:
   - oraclejdk8
