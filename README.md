@@ -47,9 +47,9 @@ The [Flyway migrations](http://flywaydb.org/documentation/migration/) must be ac
 Configuration
 -------------
 
-`dropwizard-flyway` is using the standard [DataSourceFactory](http://dropwizard.io/1.0.0/dropwizard-db/apidocs/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](http://dropwizard.io/1.0.0/dropwizard-db/) for configuring its [DataSource](http://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html).
+`dropwizard-flyway` is using the standard [DataSourceFactory](http://dropwizard.io/1.0.0/dropwizard-db/apidocs/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](http://dropwizard.io/1.0.0/dropwizard-db/) for configuring its [DataSource](http://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html).
 
-Additionally you can override the following configuration settings of Flyway using [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/1.0.0-rc2-1/apidocs/io/dropwizard/flyway/FlywayFactory.html):
+Additionally you can override the following configuration settings of Flyway using [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/1.0.0-rc3-1/apidocs/io/dropwizard/flyway/FlywayFactory.html):
 
     flyway:
       # The encoding of SQL migrations. (default: UTF-8) 
@@ -77,6 +77,15 @@ Additionally you can override the following configuration settings of Flyway usi
         - db/migration
       # The fully qualified class names of the custom MigrationResolvers to be used in addition to the built-in ones for resolving Migrations to apply. (default: empty list)
       resolvers:
+      # Allows migrations to be run "out of order". If you already have versions 1 and 3 applied, and now a version 2 is found, it will be applied too instead of being ignored. (default: false)
+      outOfOrder: false
+      # The description to tag an existing schema with when executing baseline. (default: << Flyway Baseline >>)
+      baselineDescription: "<< Flyway Baseline >>"
+      # Whether to automatically call baseline when migrate is executed against a non-empty schema with no metadata table. (default: false)
+      # Be careful when enabling this as it removes the safety net that ensures Flyway does not migrate the wrong database in case of a configuration mistake!
+      baselineOnMigrate: false
+      # Whether to automatically call validate or not when running migrate. (default: true)
+      validateOnMigrate: true
 
 
 Maven Artifacts
