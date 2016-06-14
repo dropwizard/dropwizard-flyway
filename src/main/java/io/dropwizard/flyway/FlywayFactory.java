@@ -52,6 +52,18 @@ public class FlywayFactory {
     private List<String> resolvers = ImmutableList.of();
     @JsonIgnore
     private ClassLoader classLoader = null;
+    @JsonProperty
+    @NotNull
+    private boolean outOfOrder = false;
+    @JsonProperty
+    @NotNull
+    private String baselineDescription = "<< Flyway Baseline >>";
+    @JsonProperty
+    @NotNull
+    private boolean baselineOnMigrate = false;
+    @JsonProperty
+    @NotNull
+    private boolean validateOnMigrate = true;
 
     public String getEncoding() {
         return encoding;
@@ -157,6 +169,38 @@ public class FlywayFactory {
         this.classLoader = classLoader;
     }
 
+    public boolean getOutOfOrder() {
+        return outOfOrder;
+    }
+
+    public void setOutOfOrder(boolean outOfOrder) {
+        this.outOfOrder = outOfOrder;
+    }
+
+    public String getBaselineDescription() {
+        return baselineDescription;
+    }
+
+    public void setBaselineDescription(String baselineDescription) {
+        this.baselineDescription = baselineDescription;
+    }
+
+    public boolean getBaselineOnMigrate() {
+        return baselineOnMigrate;
+    }
+
+    public void setBaselineOnMigrate(boolean baselineOnMigrate) {
+        this.baselineOnMigrate = baselineOnMigrate;
+    }
+
+    public boolean getValidateOnMigrate() {
+        return validateOnMigrate;
+    }
+
+    public void setValidateOnMigrate(boolean validateOnMigrate) {
+        this.validateOnMigrate = validateOnMigrate;
+    }
+
     public Flyway build(final DataSource dataSource) {
         final String[] fwSchemas = new String[schemas.size()];
         final String[] fwCallbacks = new String[callbacks.size()];
@@ -182,6 +226,10 @@ public class FlywayFactory {
         flyway.setPlaceholders(placeholders);
         flyway.setLocations(locations.toArray(fwLocations));
         flyway.setResolversAsClassNames(resolvers.toArray(fwResolvers));
+        flyway.setOutOfOrder(outOfOrder);
+        flyway.setBaselineDescription(baselineDescription);
+        flyway.setBaselineOnMigrate(baselineOnMigrate);
+        flyway.setValidateOnMigrate(validateOnMigrate);
 
         return flyway;
     }
