@@ -11,7 +11,7 @@ Dropwizard Flyway
 Usage
 -----
 
-Just add the `FlywayBundle` to your Dropwizard application inside the [`Application#initialize`](http://dropwizard.io/0.9.0/dropwizard-core/apidocs/io/dropwizard/Application.html#initialize%28io.dropwizard.setup.Bootstrap%29) method.
+Just add the `FlywayBundle` to your Dropwizard application inside the [`Application#initialize`](http://dropwizard.io/0.9.2/dropwizard-core/apidocs/io/dropwizard/Application.html#initialize%28io.dropwizard.setup.Bootstrap%29) method.
 
     @Override
     public void initialize(Bootstrap<MyConfiguration> bootstrap) {
@@ -41,7 +41,7 @@ After that you can use one of the following Flyway commands:
 | `db init`     | Creates and initializes the metadata table (existing database)               |
 | `db repair`   | Repairs the metadata table                                                   |
 
-The [Flyway migrations](http://flywaydb.org/documentation/migration/) must be accessible in the classpath under `db/migration` (or any other path configured with the `locations` parameter, see [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/0.9.2-1/apidocs/io/dropwizard/flyway/FlywayFactory.html)).
+The [Flyway migrations](http://flywaydb.org/documentation/migration/) must be accessible in the classpath under `db/migration` (or any other path configured with the `locations` parameter, see [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/0.9.2-2/apidocs/io/dropwizard/flyway/FlywayFactory.html)).
 
 
 Configuration
@@ -49,7 +49,7 @@ Configuration
 
 `dropwizard-flyway` is using the standard [DataSourceFactory](http://dropwizard.io/0.9.2/dropwizard-db/apidocs/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](http://dropwizard.io/0.9.2/dropwizard-db/) for configuring its [DataSource](http://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html).
 
-Additionally you can override the following configuration settings of Flyway using [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/0.9.2-1/apidocs/io/dropwizard/flyway/FlywayFactory.html):
+Additionally you can override the following configuration settings of Flyway using [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/0.9.2-2/apidocs/io/dropwizard/flyway/FlywayFactory.html):
 
     flyway:
       # The encoding of SQL migrations. (default: UTF-8) 
@@ -77,6 +77,15 @@ Additionally you can override the following configuration settings of Flyway usi
         - db/migration
       # The fully qualified class names of the custom MigrationResolvers to be used in addition to the built-in ones for resolving Migrations to apply. (default: empty list)
       resolvers:
+      # Allows migrations to be run "out of order". If you already have versions 1 and 3 applied, and now a version 2 is found, it will be applied too instead of being ignored. (default: false)
+      outOfOrder: false
+      # The description to tag an existing schema with when executing baseline. (default: << Flyway Baseline >>)
+      baselineDescription: "<< Flyway Baseline >>"
+      # Whether to automatically call baseline when migrate is executed against a non-empty schema with no metadata table. (default: false)
+      # Be careful when enabling this as it removes the safety net that ensures Flyway does not migrate the wrong database in case of a configuration mistake!
+      baselineOnMigrate: false
+      # Whether to automatically call validate or not when running migrate. (default: true)
+      validateOnMigrate: true
 
 
 Maven Artifacts
@@ -87,7 +96,7 @@ This project is available on Maven Central. To add it to your project simply add
     <dependency>
       <groupId>io.dropwizard.modules</groupId>
       <artifactId>dropwizard-flyway</artifactId>
-      <version>0.9.2-1</version>
+      <version>0.9.2-2</version>
     </dependency>
 
 
