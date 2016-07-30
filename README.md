@@ -96,7 +96,7 @@ This project is available on Maven Central. To add it to your project simply add
     <dependency>
       <groupId>io.dropwizard.modules</groupId>
       <artifactId>dropwizard-flyway</artifactId>
-      <version>1.0.0-rc3-2</version>
+      <version>1.0.0-1</version>
     </dependency>
 
 
