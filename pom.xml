@@ -8,7 +8,7 @@
 
     <groupId>io.dropwizard.modules</groupId>
     <artifactId>dropwizard-flyway</artifactId>
-    <version>1.0.0-1</version>
+    <version>1.0.0-2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Dropwizard Flyway Bundle</name>
@@ -27,7 +27,7 @@
         <developerConnection>scm:git:git@github.com:dropwizard/dropwizard-flyway.git</developerConnection>
         <connection>scm:git:https://github.com/dropwizard/dropwizard-flyway.git</connection>
         <url>https://github.com/dropwizard/dropwizard-flyway</url>
-      <tag>dropwizard-flyway-1.0.0-1</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <ciManagement>
