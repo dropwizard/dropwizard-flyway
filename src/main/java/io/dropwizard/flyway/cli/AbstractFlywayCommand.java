@@ -1,5 +1,6 @@
 package io.dropwizard.flyway.cli;
 
+import io.dropwizard.flyway.FlywayCommand;
 import io.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.flyway.FlywayFactory;
 import io.dropwizard.Configuration;
@@ -18,6 +19,16 @@ abstract class AbstractFlywayCommand<T extends Configuration> extends Configured
     private final DatabaseConfiguration<T> databaseConfiguration;
     private final FlywayConfiguration<T> flywayConfiguration;
     private final Class<T> configurationClass;
+
+    AbstractFlywayCommand(final FlywayCommand flywayCommand,
+                          final DatabaseConfiguration<T> databaseConfiguration,
+                          final FlywayConfiguration<T> flywayConfiguration,
+                          final Class<T> configurationClass) {
+        super(flywayCommand.toString(), flywayCommand.description());
+        this.databaseConfiguration = databaseConfiguration;
+        this.flywayConfiguration = flywayConfiguration;
+        this.configurationClass = configurationClass;
+    }
 
     AbstractFlywayCommand(final String name,
                           final String description,

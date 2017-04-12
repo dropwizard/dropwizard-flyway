@@ -1,5 +1,7 @@
 package io.dropwizard.flyway.cli;
 
+import io.dropwizard.flyway.FlywayCommand;
+import io.dropwizard.flyway.FlywayCommands;
 import io.dropwizard.flyway.FlywayConfiguration;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.flywaydb.core.Flyway;
@@ -14,11 +16,12 @@ public class DbValidateCommand<T extends Configuration> extends AbstractFlywayCo
     private static final String OUT_OF_ORDER = "outOfOrder";
     private static final String CLEAN_ON_VALIDATION_ERROR = "cleanOnValidationError";
 
+    private static final FlywayCommand COMMAND = FlywayCommand.VALIDATE;
+
     public DbValidateCommand(final DatabaseConfiguration<T> databaseConfiguration,
                              final FlywayConfiguration<T> flywayConfiguration,
                              final Class<T> configurationClass) {
-        super("validate", "Validates the applied migrations against the ones available on the classpath.",
-                databaseConfiguration, flywayConfiguration, configurationClass);
+        super(COMMAND, databaseConfiguration, flywayConfiguration, configurationClass);
     }
 
     @Override
@@ -48,6 +51,6 @@ public class DbValidateCommand<T extends Configuration> extends AbstractFlywayCo
         flyway.setOutOfOrder(namespace.getBoolean(OUT_OF_ORDER));
         flyway.setCleanOnValidationError(namespace.getBoolean(CLEAN_ON_VALIDATION_ERROR));
 
-        flyway.validate();
+        FlywayCommands.execute(flyway, COMMAND);
     }
 }
