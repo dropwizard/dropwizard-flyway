@@ -13,7 +13,7 @@ public abstract class FlywayBundle<T extends Configuration>
     @Override
     public final void initialize(final Bootstrap<?> bootstrap) {
         final Class<T> klass = Generics.getTypeParameter(getClass(), Configuration.class);
-        bootstrap.addCommand(new DbCommand<T>(this, this, klass));
+        bootstrap.addCommand(new DbCommand<T>(name(), this, this, klass));
     }
 
     @Override
@@ -25,5 +25,9 @@ public abstract class FlywayBundle<T extends Configuration>
     public FlywayFactory getFlywayFactory(T configuration) {
         // Default Flyway configuration
         return new FlywayFactory();
+    }
+
+    public String name() {
+        return "db";
     }
 }
