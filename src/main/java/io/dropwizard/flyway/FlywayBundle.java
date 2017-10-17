@@ -27,7 +27,7 @@ public abstract class FlywayBundle<T extends Configuration>
         return new FlywayFactory();
     }
 
-    public String name() {
+    protected String name() {
         return "db";
     }
 }
