@@ -14,10 +14,10 @@ public class DbCommand<T extends Configuration> extends AbstractFlywayCommand<T>
     private static final String COMMAND_NAME_ATTR = "subCommand";
     private final SortedMap<String, AbstractFlywayCommand<T>> subCommands = new TreeMap<>();
 
-    public DbCommand(final DatabaseConfiguration<T> databaseConfiguration,
+    public DbCommand(final String name, final DatabaseConfiguration<T> databaseConfiguration,
                      final FlywayConfiguration<T> flywayConfiguration,
                      final Class<T> configurationClass) {
-        super("db", "Run database migration tasks",
+        super(name, "Run database migration tasks",
                 databaseConfiguration, flywayConfiguration, configurationClass);
 
         addSubCommand(new DbMigrateCommand<>(databaseConfiguration, flywayConfiguration, configurationClass));
