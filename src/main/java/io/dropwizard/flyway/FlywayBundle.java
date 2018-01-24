@@ -3,6 +3,8 @@ package io.dropwizard.flyway;
 import io.dropwizard.flyway.cli.DbCommand;
 import io.dropwizard.Bundle;
 import io.dropwizard.Configuration;
+import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
+import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.db.DatabaseConfiguration;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -10,8 +12,16 @@ import io.dropwizard.util.Generics;
 
 public abstract class FlywayBundle<T extends Configuration>
         implements Bundle, DatabaseConfiguration<T>, FlywayConfiguration<T> {
+
     @Override
     public final void initialize(final Bootstrap<?> bootstrap) {
+        bootstrap.setConfigurationSourceProvider(
+                new SubstitutingSourceProvider(
+                        bootstrap.getConfigurationSourceProvider(),
+                        new EnvironmentVariableSubstitutor(false)
+                )
+        );
+
         final Class<T> klass = Generics.getTypeParameter(getClass(), Configuration.class);
         bootstrap.addCommand(new DbCommand<T>(name(), this, this, klass));
     }
