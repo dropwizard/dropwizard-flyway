@@ -1,19 +1,23 @@
 package io.dropwizard.flyway;
 
 import org.flywaydb.core.Flyway;
+import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import javax.sql.DataSource;
+import java.nio.charset.StandardCharsets;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
-@RunWith(MockitoJUnitRunner.class)
 public class FlywayFactoryTest {
+    @Rule
+    public final MockitoRule mockitoRule = MockitoJUnit.rule();
+
     @Mock
     private DataSource mockDataSource;
 
@@ -24,7 +28,7 @@ public class FlywayFactoryTest {
 
         assertNotNull(flyway);
         assertSame(mockDataSource, flyway.getDataSource());
-        assertEquals("UTF-8", flyway.getEncoding());
+        assertEquals(StandardCharsets.UTF_8, flyway.getEncoding());
         assertEquals("schema_version", flyway.getTable());
         assertEquals(0, flyway.getSchemas().length);
     }

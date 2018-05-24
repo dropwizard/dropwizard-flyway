@@ -218,7 +218,7 @@ public class FlywayFactory {
         flyway.setTable(metaDataTableName);
         flyway.setSqlMigrationPrefix(sqlMigrationPrefix);
         flyway.setSqlMigrationSeparator(sqlMigrationSeparator);
-        flyway.setSqlMigrationSuffix(sqlMigrationSuffix);
+        flyway.setSqlMigrationSuffixes(sqlMigrationSuffix);
         flyway.setSchemas(schemas.toArray(fwSchemas));
         flyway.setCallbacksAsClassNames(callbacks.toArray(fwCallbacks));
         flyway.setPlaceholderPrefix(placeholderPrefix);
