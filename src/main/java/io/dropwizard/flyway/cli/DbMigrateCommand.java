@@ -1,8 +1,8 @@
 package io.dropwizard.flyway.cli;
 
-import io.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
+import io.dropwizard.flyway.FlywayConfiguration;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.flywaydb.core.Flyway;
@@ -32,14 +32,12 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
 
         subparser.addArgument("--" + OUT_OF_ORDER)
                 .action(storeTrue())
-                .setDefault(Boolean.FALSE)
                 .dest(OUT_OF_ORDER)
                 .help("Allows migrations to be run \"out of order\". " +
                         "If you already have versions 1 and 3 applied, and now a version 2 is found, it will be applied too instead of being ignored.");
 
         subparser.addArgument("--" + VALIDATE_ON_MIGRATE)
                 .action(storeTrue())
-                .setDefault(Boolean.FALSE)
                 .dest(VALIDATE_ON_MIGRATE)
                 .help("Whether to automatically call validate or not when running migrate. " +
                         "For each sql migration a CRC32 checksum is calculated when the sql script is executed. " +
@@ -47,7 +45,6 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
 
         subparser.addArgument("--" + CLEAN_ON_VALIDATION_ERROR)
                 .action(storeTrue())
-                .setDefault(Boolean.FALSE)
                 .dest(CLEAN_ON_VALIDATION_ERROR)
                 .help("Whether to automatically call clean or not when a validation error occurs. " +
                         "This is exclusively intended as a convenience for development. " +
@@ -57,7 +54,6 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
 
         subparser.addArgument("--" + INIT_ON_MIGRATE)
                 .action(storeTrue())
-                .setDefault(Boolean.FALSE)
                 .dest(INIT_ON_MIGRATE)
                 .help("Whether to automatically call init when migrate is executed against a non-empty schema with no metadata table. " +
                         "This schema will then be initialized with the initVersion before executing the migrations. " +
@@ -68,10 +64,26 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
 
     @Override
     public void run(final Namespace namespace, final Flyway flyway) throws Exception {
-        flyway.setOutOfOrder(namespace.getBoolean(OUT_OF_ORDER));
-        flyway.setValidateOnMigrate(namespace.getBoolean(VALIDATE_ON_MIGRATE));
-        flyway.setCleanOnValidationError(namespace.getBoolean(CLEAN_ON_VALIDATION_ERROR));
-        flyway.setBaselineOnMigrate(namespace.getBoolean(INIT_ON_MIGRATE));
+        final Boolean outOfOrder = namespace.getBoolean(OUT_OF_ORDER);
+        final Boolean validateOnMigrate = namespace.getBoolean(VALIDATE_ON_MIGRATE);
+        final Boolean cleanOnValidationError = namespace.getBoolean(CLEAN_ON_VALIDATION_ERROR);
+        final Boolean baselineOnMigrate = namespace.getBoolean(INIT_ON_MIGRATE);
+
+        if (outOfOrder != null) {
+            flyway.setOutOfOrder(outOfOrder);
+        }
+
+        if (validateOnMigrate != null) {
+            flyway.setValidateOnMigrate(validateOnMigrate);
+        }
+
+        if (cleanOnValidationError != null) {
+            flyway.setCleanOnValidationError(cleanOnValidationError);
+        }
+
+        if (baselineOnMigrate != null) {
+            flyway.setBaselineOnMigrate(baselineOnMigrate);
+        }
 
         final int successfulMigrations = flyway.migrate();
         LOG.debug("{} successful migrations applied", successfulMigrations);
