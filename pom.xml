@@ -123,7 +123,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.6</version>
+                    <version>3.7.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -261,10 +261,10 @@
                             <report>index</report>
                             <report>dependency-info</report>
                             <report>dependencies</report>
-                            <report>issue-tracking</report>
+                            <report>issue-management</report>
                             <report>scm</report>
-                            <report>license</report>
-                            <report>project-team</report>
+                            <report>licenses</report>
+                            <report>team</report>
                         </reports>
                     </reportSet>
                 </reportSets>
