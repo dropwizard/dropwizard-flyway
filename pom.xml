@@ -277,7 +277,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <additionalparam>${javadoc.doclint.none}</additionalparam>
                     <show>public</show>
                     <quiet>true</quiet>
                 </configuration>
@@ -294,15 +293,6 @@
     </reporting>
 
     <profiles>
-        <profile>
-            <id>java8-disable-strict-javadoc</id>
-            <activation>
-                <jdk>[1.8,)</jdk>
-            </activation>
-            <properties>
-                <javadoc.doclint.none>-Xdoclint:none</javadoc.doclint.none>
-            </properties>
-        </profile>
         <profile>
             <id>release</id>
             <build>
@@ -323,7 +313,6 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <configuration>
-                            <additionalparam>${javadoc.doclint.none}</additionalparam>
                             <quiet>true</quiet>
                         </configuration>
                         <executions>
