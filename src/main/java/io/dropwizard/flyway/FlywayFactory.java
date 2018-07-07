@@ -25,7 +25,7 @@ public class FlywayFactory {
     private List<String> callbacks = ImmutableList.of();
     @JsonProperty
     @NotEmpty
-    private String metaDataTableName = "schema_version";
+    private String metaDataTableName = "flyway_schema_history";
     @JsonProperty
     @NotEmpty
     private String sqlMigrationPrefix = "V";

@@ -29,7 +29,7 @@ public class FlywayFactoryTest {
         assertNotNull(flyway);
         assertSame(mockDataSource, flyway.getDataSource());
         assertEquals(StandardCharsets.UTF_8, flyway.getEncoding());
-        assertEquals("schema_version", flyway.getTable());
+        assertEquals("flyway_schema_history", flyway.getTable());
         assertEquals(0, flyway.getSchemas().length);
     }
 }

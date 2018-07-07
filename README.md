@@ -58,8 +58,8 @@ Additionally you can override the following configuration settings of Flyway usi
       schemas:
       # The fully qualified class names of the callbacks for lifecycle notifications. (default: empty list)
       callbacks:
-      # The name of the schema metadata table that will be used by Flyway. (default: schema_version)
-      metaDataTableName: schema_version
+      # The name of the schema metadata table that will be used by Flyway. (default: flyway_schema_history)
+      metaDataTableName: flyway_schema_history
       # The file name prefix for sql migrations (default: V)
       sqlMigrationPrefix: V
       # The file name separator for sql migrations (default: __)
