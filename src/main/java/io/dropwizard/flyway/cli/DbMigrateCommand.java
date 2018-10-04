@@ -31,20 +31,17 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
         super.configure(subparser);
 
         subparser.addArgument("--" + OUT_OF_ORDER)
-                .action(storeTrue())
                 .dest(OUT_OF_ORDER)
                 .help("Allows migrations to be run \"out of order\". " +
                         "If you already have versions 1 and 3 applied, and now a version 2 is found, it will be applied too instead of being ignored.");
 
         subparser.addArgument("--" + VALIDATE_ON_MIGRATE)
-                .action(storeTrue())
                 .dest(VALIDATE_ON_MIGRATE)
                 .help("Whether to automatically call validate or not when running migrate. " +
                         "For each sql migration a CRC32 checksum is calculated when the sql script is executed. " +
                         "The validate mechanism checks if the sql migration in the classpath still has the same checksum as the sql migration already executed in the database.");
 
         subparser.addArgument("--" + CLEAN_ON_VALIDATION_ERROR)
-                .action(storeTrue())
                 .dest(CLEAN_ON_VALIDATION_ERROR)
                 .help("Whether to automatically call clean or not when a validation error occurs. " +
                         "This is exclusively intended as a convenience for development. " +
@@ -53,7 +50,6 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
                         "Warning! Do not enable in production !");
 
         subparser.addArgument("--" + INIT_ON_MIGRATE)
-                .action(storeTrue())
                 .dest(INIT_ON_MIGRATE)
                 .help("Whether to automatically call init when migrate is executed against a non-empty schema with no metadata table. " +
                         "This schema will then be initialized with the initVersion before executing the migrations. " +

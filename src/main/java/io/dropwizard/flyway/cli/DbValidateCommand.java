@@ -26,13 +26,11 @@ public class DbValidateCommand<T extends Configuration> extends AbstractFlywayCo
         super.configure(subparser);
 
         subparser.addArgument("--" + OUT_OF_ORDER)
-                .action(storeTrue())
                 .dest(OUT_OF_ORDER)
                 .help("Allows migrations to be run \"out of order\". " +
                         "If you already have versions 1 and 3 applied, and now a version 2 is found, it will be applied too instead of being ignored.");
 
         subparser.addArgument("--" + CLEAN_ON_VALIDATION_ERROR)
-                .action(storeTrue())
                 .dest(CLEAN_ON_VALIDATION_ERROR)
                 .help("Whether to automatically call clean or not when a validation error occurs. " +
                         "This is exclusively intended as a convenience for development. " +
