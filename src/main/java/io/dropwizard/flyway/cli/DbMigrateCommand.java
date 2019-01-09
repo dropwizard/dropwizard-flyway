@@ -6,6 +6,7 @@ import io.dropwizard.flyway.FlywayConfiguration;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.configuration.FluentConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -69,23 +70,27 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
         final Boolean cleanOnValidationError = namespace.getBoolean(CLEAN_ON_VALIDATION_ERROR);
         final Boolean baselineOnMigrate = namespace.getBoolean(INIT_ON_MIGRATE);
 
+        FluentConfiguration config = Flyway.configure(flyway.getConfiguration().getClassLoader()).configuration(flyway.getConfiguration());
+        
         if (outOfOrder != null) {
-            flyway.setOutOfOrder(outOfOrder);
+            config.outOfOrder(outOfOrder);
         }
 
         if (validateOnMigrate != null) {
-            flyway.setValidateOnMigrate(validateOnMigrate);
+            config.validateOnMigrate(validateOnMigrate);
         }
 
         if (cleanOnValidationError != null) {
-            flyway.setCleanOnValidationError(cleanOnValidationError);
+            config.cleanOnValidationError(cleanOnValidationError);
         }
 
         if (baselineOnMigrate != null) {
-            flyway.setBaselineOnMigrate(baselineOnMigrate);
+            config.baselineOnMigrate(baselineOnMigrate);
         }
 
-        final int successfulMigrations = flyway.migrate();
+        Flyway customFlyway = config.load();
+        
+        final int successfulMigrations = customFlyway.migrate();
         LOG.debug("{} successful migrations applied", successfulMigrations);
     }
 }
