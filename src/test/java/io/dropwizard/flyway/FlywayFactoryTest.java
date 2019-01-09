@@ -27,9 +27,9 @@ public class FlywayFactoryTest {
         final Flyway flyway = factory.build(mockDataSource);
 
         assertNotNull(flyway);
-        assertSame(mockDataSource, flyway.getDataSource());
-        assertEquals(StandardCharsets.UTF_8, flyway.getEncoding());
-        assertEquals("flyway_schema_history", flyway.getTable());
-        assertEquals(0, flyway.getSchemas().length);
+        assertSame(mockDataSource, flyway.getConfiguration().getDataSource());
+        assertEquals(StandardCharsets.UTF_8, flyway.getConfiguration().getEncoding());
+        assertEquals("flyway_schema_history", flyway.getConfiguration().getTable());
+        assertEquals(0, flyway.getConfiguration().getSchemas().length);
     }
 }

@@ -6,6 +6,7 @@ import io.dropwizard.flyway.FlywayConfiguration;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.configuration.FluentConfiguration;
 
 import static net.sourceforge.argparse4j.impl.Arguments.storeTrue;
 
@@ -46,14 +47,18 @@ public class DbValidateCommand<T extends Configuration> extends AbstractFlywayCo
         final Boolean namespaceBoolean = namespace.getBoolean(OUT_OF_ORDER);
         final Boolean cleanOnValidationError = namespace.getBoolean(CLEAN_ON_VALIDATION_ERROR);
 
+        FluentConfiguration config = Flyway.configure(flyway.getConfiguration().getClassLoader()).configuration(flyway.getConfiguration());
+        
         if (namespaceBoolean != null) {
-            flyway.setOutOfOrder(namespaceBoolean);
+            config.outOfOrder(namespaceBoolean);
         }
 
         if (cleanOnValidationError != null) {
-            flyway.setCleanOnValidationError(cleanOnValidationError);
+            config.cleanOnValidationError(cleanOnValidationError);
         }
 
-        flyway.validate();
+        Flyway customFlyway = config.load();
+        
+        customFlyway.validate();
     }
 }

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.MigrationVersion;
 import org.flywaydb.core.api.callback.Callback;
-import org.flywaydb.core.api.errorhandler.ErrorHandler;
+import org.flywaydb.core.api.configuration.FluentConfiguration;
 import org.flywaydb.core.api.resolver.MigrationResolver;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -634,63 +634,61 @@ public class FlywayFactory {
 
     public Flyway build(final DataSource dataSource) {
         final String[] emptyStringArray = new String[0];
-        final Flyway flyway = classLoader == null ? new Flyway() : new Flyway(classLoader);
+        
+        FluentConfiguration flyway = classLoader == null ? Flyway.configure() : Flyway.configure(classLoader);
 
-        flyway.setDataSource(dataSource);
-        flyway.setBaselineDescription(baselineDescription);
-        flyway.setBaselineOnMigrate(baselineOnMigrate);
-        flyway.setBaselineVersionAsString(baseLineVersion);
-        flyway.setCallbacksAsClassNames(callbacks.toArray(emptyStringArray));
-        flyway.setCleanDisabled(cleanDisabled);
-        flyway.setEncoding(encoding);
-        flyway.setGroup(group);
-        flyway.setIgnoreFutureMigrations(ignoreFutureMigrations);
-        flyway.setIgnoreIgnoredMigrations(ignoreIgnoredMigrations);
-        flyway.setIgnoreMissingMigrations(ignoreMissingMigrations);
-        flyway.setInstalledBy(installedBy);
-        flyway.setLocations(locations.toArray(emptyStringArray));
-        flyway.setMixed(mixed);
-        flyway.setOutOfOrder(outOfOrder);
-        flyway.setPlaceholderPrefix(placeholderPrefix);
-        flyway.setPlaceholderReplacement(placeholderReplacement);
-        flyway.setPlaceholderSuffix(placeholderSuffix);
-        flyway.setPlaceholders(placeholders);
-        flyway.setResolversAsClassNames(resolvers.toArray(emptyStringArray));
-        flyway.setSchemas(schemas.toArray(emptyStringArray));
-        flyway.setSkipDefaultCallbacks(skipDefaultCallbacks);
-        flyway.setSkipDefaultResolvers(skipDefaultResolvers);
-        flyway.setSqlMigrationPrefix(sqlMigrationPrefix);
-        flyway.setSqlMigrationSeparator(sqlMigrationSeparator);
-        flyway.setSqlMigrationSuffixes(sqlMigrationSuffixes.toArray(emptyStringArray));
-        flyway.setTable(metaDataTableName);
-        flyway.setValidateOnMigrate(validateOnMigrate);
+        flyway = flyway.dataSource(dataSource)
+              .baselineDescription(baselineDescription)
+              .baselineOnMigrate(baselineOnMigrate)
+              .baselineVersion(baseLineVersion)
+              .callbacks(callbacks.toArray(emptyStringArray))
+              .cleanDisabled(cleanDisabled)
+              .encoding(encoding)
+              .group(group)
+              .ignoreFutureMigrations(ignoreFutureMigrations)
+              .ignoreIgnoredMigrations(ignoreIgnoredMigrations)
+              .ignoreMissingMigrations(ignoreMissingMigrations)
+              .installedBy(installedBy)
+              .locations(locations.toArray(emptyStringArray))
+              .mixed(mixed)
+              .outOfOrder(outOfOrder)
+              .placeholderPrefix(placeholderPrefix)
+              .placeholderReplacement(placeholderReplacement)
+              .placeholderSuffix(placeholderSuffix)
+              .placeholders(placeholders)
+              .resolvers(resolvers.toArray(emptyStringArray))
+              .schemas(schemas.toArray(emptyStringArray))
+              .skipDefaultCallbacks(skipDefaultCallbacks)
+              .skipDefaultResolvers(skipDefaultResolvers)
+              .sqlMigrationPrefix(sqlMigrationPrefix)
+              .sqlMigrationSeparator(sqlMigrationSeparator)
+              .sqlMigrationSuffixes(sqlMigrationSuffixes.toArray(emptyStringArray))
+              .table(metaDataTableName)
+              .validateOnMigrate(validateOnMigrate);
 
         // Commercial features
         if (batch != null) {
-            flyway.setBatch(batch);
+            flyway.batch(batch);
         }
         if (dryRunOutputFile != null) {
-            flyway.setDryRunOutputAsFile(dryRunOutputFile);
-        }
-        if (errorHandlers != null) {
-            flyway.setErrorHandlersAsClassNames(errorHandlers.toArray(emptyStringArray));
+            flyway.dryRunOutput(dryRunOutputFile);
         }
         if (errorOverrides != null) {
-            flyway.setErrorOverrides(errorOverrides.toArray(emptyStringArray));
+            flyway.errorOverrides(errorOverrides.toArray(emptyStringArray));
         }
         if (oracleSqlPlus != null) {
-            flyway.setOracleSqlplus(oracleSqlPlus);
+            flyway.oracleSqlplus(oracleSqlPlus);
         }
         if (stream != null) {
-            flyway.setStream(stream);
+            flyway.stream(stream);
         }
         if (target != null) {
-            flyway.setTargetAsString(target);
+            flyway.target(target);
         }
         if (undoSqlMigrationPrefix != null) {
-            flyway.setUndoSqlMigrationPrefix(undoSqlMigrationPrefix);
+            flyway.undoSqlMigrationPrefix(undoSqlMigrationPrefix);
         }
 
-        return flyway;
+        return flyway.load();
     }
 }
