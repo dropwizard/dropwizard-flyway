@@ -632,39 +632,45 @@ public class FlywayFactory {
         this.undoSqlMigrationPrefix = undoSqlMigrationPrefix;
     }
 
+    public Flyway build(final String url, final String user, final String password) {
+        return createConfiguration().dataSource(url, user, password).load();
+    }
+
     public Flyway build(final DataSource dataSource) {
-        final String[] emptyStringArray = new String[0];
-        
+        return createConfiguration().dataSource(dataSource).load();
+    }
+
+    private FluentConfiguration createConfiguration() {
         FluentConfiguration flyway = classLoader == null ? Flyway.configure() : Flyway.configure(classLoader);
 
-        flyway = flyway.dataSource(dataSource)
-              .baselineDescription(baselineDescription)
-              .baselineOnMigrate(baselineOnMigrate)
-              .baselineVersion(baseLineVersion)
-              .callbacks(callbacks.toArray(emptyStringArray))
-              .cleanDisabled(cleanDisabled)
-              .encoding(encoding)
-              .group(group)
-              .ignoreFutureMigrations(ignoreFutureMigrations)
-              .ignoreIgnoredMigrations(ignoreIgnoredMigrations)
-              .ignoreMissingMigrations(ignoreMissingMigrations)
-              .installedBy(installedBy)
-              .locations(locations.toArray(emptyStringArray))
-              .mixed(mixed)
-              .outOfOrder(outOfOrder)
-              .placeholderPrefix(placeholderPrefix)
-              .placeholderReplacement(placeholderReplacement)
-              .placeholderSuffix(placeholderSuffix)
-              .placeholders(placeholders)
-              .resolvers(resolvers.toArray(emptyStringArray))
-              .schemas(schemas.toArray(emptyStringArray))
-              .skipDefaultCallbacks(skipDefaultCallbacks)
-              .skipDefaultResolvers(skipDefaultResolvers)
-              .sqlMigrationPrefix(sqlMigrationPrefix)
-              .sqlMigrationSeparator(sqlMigrationSeparator)
-              .sqlMigrationSuffixes(sqlMigrationSuffixes.toArray(emptyStringArray))
-              .table(metaDataTableName)
-              .validateOnMigrate(validateOnMigrate);
+        final String[] emptyStringArray = new String[0];
+        flyway = flyway.baselineDescription(baselineDescription)
+                .baselineOnMigrate(baselineOnMigrate)
+                .baselineVersion(baseLineVersion)
+                .callbacks(callbacks.toArray(emptyStringArray))
+                .cleanDisabled(cleanDisabled)
+                .encoding(encoding)
+                .group(group)
+                .ignoreFutureMigrations(ignoreFutureMigrations)
+                .ignoreIgnoredMigrations(ignoreIgnoredMigrations)
+                .ignoreMissingMigrations(ignoreMissingMigrations)
+                .installedBy(installedBy)
+                .locations(locations.toArray(emptyStringArray))
+                .mixed(mixed)
+                .outOfOrder(outOfOrder)
+                .placeholderPrefix(placeholderPrefix)
+                .placeholderReplacement(placeholderReplacement)
+                .placeholderSuffix(placeholderSuffix)
+                .placeholders(placeholders)
+                .resolvers(resolvers.toArray(emptyStringArray))
+                .schemas(schemas.toArray(emptyStringArray))
+                .skipDefaultCallbacks(skipDefaultCallbacks)
+                .skipDefaultResolvers(skipDefaultResolvers)
+                .sqlMigrationPrefix(sqlMigrationPrefix)
+                .sqlMigrationSeparator(sqlMigrationSeparator)
+                .sqlMigrationSuffixes(sqlMigrationSuffixes.toArray(emptyStringArray))
+                .table(metaDataTableName)
+                .validateOnMigrate(validateOnMigrate);
 
         // Commercial features
         if (batch != null) {
@@ -689,6 +695,6 @@ public class FlywayFactory {
             flyway.undoSqlMigrationPrefix(undoSqlMigrationPrefix);
         }
 
-        return flyway.load();
+        return flyway;
     }
 }
