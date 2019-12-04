@@ -56,6 +56,8 @@ public class FlywayFactory {
     @JsonProperty
     @NotNull
     private List<String> resolvers = Collections.emptyList();
+    @JsonProperty
+    private String initSql = null;
     @JsonIgnore
     private ClassLoader classLoader = null;
     @JsonProperty
@@ -284,6 +286,20 @@ public class FlywayFactory {
      */
     public void setResolvers(final List<String> resolvers) {
         this.resolvers = resolvers;
+    }
+
+    /**
+     * @see Flyway#initSql(String)
+     */
+    public String getInitSql() {
+        return initSql;
+    }
+
+    /**
+     * @see Flyway#initSql(String)
+     */
+    public void setInitSql(String initSql) {
+        this.initSql = initSql;
     }
 
     /**
@@ -657,6 +673,7 @@ public class FlywayFactory {
               .placeholderSuffix(placeholderSuffix)
               .placeholders(placeholders)
               .resolvers(resolvers.toArray(emptyStringArray))
+              .initSql(initSql)
               .schemas(schemas.toArray(emptyStringArray))
               .skipDefaultCallbacks(skipDefaultCallbacks)
               .skipDefaultResolvers(skipDefaultResolvers)
