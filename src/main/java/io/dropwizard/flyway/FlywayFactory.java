@@ -627,13 +627,18 @@ public class FlywayFactory {
         this.undoSqlMigrationPrefix = undoSqlMigrationPrefix;
     }
 
-    public Flyway build(final DataSource dataSource) {
-        final String[] emptyStringArray = new String[0];
-        
-        FluentConfiguration flyway = classLoader == null ? Flyway.configure() : Flyway.configure(classLoader);
+    public Flyway build(final String url, final String user, final String password) {
+        return createConfiguration().dataSource(url, user, password).load();
+    }
 
-        flyway = flyway.dataSource(dataSource)
-              .baselineDescription(baselineDescription)
+    public Flyway build(final DataSource dataSource) {
+        return createConfiguration().dataSource(dataSource).load();
+    }
+
+    private FluentConfiguration createConfiguration() {
+        final String[] emptyStringArray = new String[0];
+        FluentConfiguration flyway = classLoader == null ? Flyway.configure() : Flyway.configure(classLoader);
+        flyway = flyway
               .baselineOnMigrate(baselineOnMigrate)
               .baselineVersion(baseLineVersion)
               .callbacks(callbacks.toArray(emptyStringArray))
@@ -685,6 +690,6 @@ public class FlywayFactory {
             flyway.undoSqlMigrationPrefix(undoSqlMigrationPrefix);
         }
 
-        return flyway.load();
+        return flyway;
     }
 }
