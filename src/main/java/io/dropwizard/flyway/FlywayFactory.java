@@ -3,10 +3,7 @@ package io.dropwizard.flyway;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.flywaydb.core.Flyway;
-import org.flywaydb.core.api.MigrationVersion;
-import org.flywaydb.core.api.callback.Callback;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
-import org.flywaydb.core.api.resolver.MigrationResolver;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -103,9 +100,6 @@ public class FlywayFactory {
     private File dryRunOutputFile;
     @JsonProperty
     @Nullable
-    private List<String> errorHandlers;
-    @JsonProperty
-    @Nullable
     private List<String> errorOverrides;
     @JsonProperty
     @Nullable
@@ -121,406 +115,406 @@ public class FlywayFactory {
     private String undoSqlMigrationPrefix;
 
     /**
-     * @see Flyway#getEncoding()
+     * @see FluentConfiguration#getEncoding()
      */
     public String getEncoding() {
         return encoding;
     }
 
     /**
-     * @see Flyway#setEncoding(String)
+     * @see FluentConfiguration#encoding(String)
      */
     public void setEncoding(final String encoding) {
         this.encoding = encoding;
     }
 
     /**
-     * @see Flyway#getSchemas()
+     * @see FluentConfiguration#getSchemas()
      */
     public List<String> getSchemas() {
         return schemas;
     }
 
     /**
-     * @see Flyway#setSchemas(String...)
+     * @see FluentConfiguration#schemas(String...)
      */
     public void setSchemas(final List<String> schemas) {
         this.schemas = schemas;
     }
 
     /**
-     * @see Flyway#getCallbacks()
+     * @see FluentConfiguration#getCallbacks()
      */
     public List<String> getCallbacks() {
         return callbacks;
     }
 
     /**
-     * @see Flyway#setCallbacks(Callback...)
+     * @see FluentConfiguration#callbacks(String...)
      */
     public void setCallbacks(final List<String> callbacks) {
         this.callbacks = callbacks;
     }
 
     /**
-     * @see Flyway#getTable()
+     * @see FluentConfiguration#getTable()
      */
     public String getMetaDataTableName() {
         return metaDataTableName;
     }
 
     /**
-     * @see Flyway#setTable(String)
+     * @see FluentConfiguration#table(String)
      */
     public void setMetaDataTableName(final String metaDataTableName) {
         this.metaDataTableName = metaDataTableName;
     }
 
     /**
-     * @see Flyway#getSqlMigrationPrefix()
+     * @see FluentConfiguration#getSqlMigrationPrefix()
      */
     public String getSqlMigrationPrefix() {
         return sqlMigrationPrefix;
     }
 
     /**
-     * @see Flyway#setSqlMigrationPrefix(String)
+     * @see FluentConfiguration#sqlMigrationPrefix(String)
      */
     public void setSqlMigrationPrefix(final String sqlMigrationPrefix) {
         this.sqlMigrationPrefix = sqlMigrationPrefix;
     }
 
     /**
-     * @see Flyway#setSqlMigrationSuffixes(String...)
+     * @see FluentConfiguration#getSqlMigrationPrefix()
      */
     public List<String> getSqlMigrationSuffixes() {
         return sqlMigrationSuffixes;
     }
 
     /**
-     * @see Flyway#setSqlMigrationSuffixes(String...)
+     * @see FluentConfiguration#sqlMigrationSuffixes(String...)
      */
     public void setSqlMigrationSuffixes(final List<String> sqlMigrationSuffixes) {
         this.sqlMigrationSuffixes = sqlMigrationSuffixes;
     }
 
     /**
-     * @see Flyway#getSqlMigrationSeparator()
+     * @see FluentConfiguration#getSqlMigrationSeparator()
      */
     public String getSqlMigrationSeparator() {
         return sqlMigrationSeparator;
     }
 
     /**
-     * @see Flyway#setSqlMigrationSeparator(String)
+     * @see FluentConfiguration#sqlMigrationSeparator(String)
      */
     public void setSqlMigrationSeparator(final String sqlMigrationSeparator) {
         this.sqlMigrationSeparator = sqlMigrationSeparator;
     }
 
     /**
-     * @see Flyway#getPlaceholderPrefix()
+     * @see FluentConfiguration#getPlaceholderPrefix()
      */
     public String getPlaceholderPrefix() {
         return placeholderPrefix;
     }
 
     /**
-     * @see Flyway#setPlaceholderPrefix(String)
+     * @see FluentConfiguration#placeholderPrefix(String)
      */
     public void setPlaceholderPrefix(final String placeholderPrefix) {
         this.placeholderPrefix = placeholderPrefix;
     }
 
     /**
-     * @see Flyway#getPlaceholderSuffix()
+     * @see FluentConfiguration#getPlaceholderSuffix()
      */
     public String getPlaceholderSuffix() {
         return placeholderSuffix;
     }
 
     /**
-     * @see Flyway#setPlaceholderSuffix(String)
+     * @see FluentConfiguration#placeholderSuffix(String)
      */
     public void setPlaceholderSuffix(final String placeholderSuffix) {
         this.placeholderSuffix = placeholderSuffix;
     }
 
     /**
-     * @see Flyway#getPlaceholders()
+     * @see FluentConfiguration#getPlaceholders()
      */
     public Map<String, String> getPlaceholders() {
         return placeholders;
     }
 
     /**
-     * @see Flyway#setPlaceholders(Map)
+     * @see FluentConfiguration#placeholders(Map)
      */
     public void setPlaceholders(final Map<String, String> placeholders) {
         this.placeholders = placeholders;
     }
 
     /**
-     * @see Flyway#getLocations()
+     * @see FluentConfiguration#getLocations()
      */
     public List<String> getLocations() {
         return locations;
     }
 
     /**
-     * @see Flyway#setLocations(String...)
+     * @see FluentConfiguration#locations(String...)
      */
     public void setLocations(final List<String> locations) {
         this.locations = locations;
     }
 
     /**
-     * @see Flyway#getResolvers()
+     * @see FluentConfiguration#getResolvers()
      */
     public List<String> getResolvers() {
         return resolvers;
     }
 
     /**
-     * @see Flyway#setResolvers(MigrationResolver...)
+     * @see FluentConfiguration#resolvers(String...)
      */
     public void setResolvers(final List<String> resolvers) {
         this.resolvers = resolvers;
     }
 
     /**
-     * @see Flyway#initSql(String)
+     * @see FluentConfiguration#getInitSql()
      */
     public String getInitSql() {
         return initSql;
     }
 
     /**
-     * @see Flyway#initSql(String)
+     * @see FluentConfiguration#initSql(String)
      */
     public void setInitSql(String initSql) {
         this.initSql = initSql;
     }
 
     /**
-     * @see Flyway#Flyway(ClassLoader)
+     * @see FluentConfiguration#getClassLoader()
      */
     public ClassLoader getClassLoader() {
         return classLoader;
     }
 
     /**
-     * @see Flyway#Flyway(ClassLoader)
+     * @see FluentConfiguration#FluentConfiguration(ClassLoader)
      */
     public void setClassLoader(ClassLoader classLoader) {
         this.classLoader = classLoader;
     }
 
     /**
-     * @see Flyway#isOutOfOrder()
+     * @see FluentConfiguration#isOutOfOrder()
      */
     public boolean isOutOfOrder() {
         return outOfOrder;
     }
 
     /**
-     * @see Flyway#setOutOfOrder(boolean)
+     * @see FluentConfiguration#outOfOrder(boolean)
      */
     public void setOutOfOrder(boolean outOfOrder) {
         this.outOfOrder = outOfOrder;
     }
 
     /**
-     * @see Flyway#getBaselineDescription()
+     * @see FluentConfiguration#getBaselineDescription()
      */
     public String getBaselineDescription() {
         return baselineDescription;
     }
 
     /**
-     * @see Flyway#setBaselineDescription(String)
+     * @see FluentConfiguration#baselineDescription(String)
      */
     public void setBaselineDescription(String baselineDescription) {
         this.baselineDescription = baselineDescription;
     }
 
     /**
-     * @see Flyway#isBaselineOnMigrate()
+     * @see FluentConfiguration#isBaselineOnMigrate()
      */
     public boolean isBaselineOnMigrate() {
         return baselineOnMigrate;
     }
 
     /**
-     * @see Flyway#setBaselineOnMigrate(boolean)
+     * @see FluentConfiguration#baselineOnMigrate(boolean)
      */
     public void setBaselineOnMigrate(boolean baselineOnMigrate) {
         this.baselineOnMigrate = baselineOnMigrate;
     }
 
     /**
-     * @see Flyway#isValidateOnMigrate()
+     * @see FluentConfiguration#isValidateOnMigrate()
      */
     public boolean isValidateOnMigrate() {
         return validateOnMigrate;
     }
 
     /**
-     * @see Flyway#setValidateOnMigrate(boolean)
+     * @see FluentConfiguration#validateOnMigrate(boolean)
      */
     public void setValidateOnMigrate(boolean validateOnMigrate) {
         this.validateOnMigrate = validateOnMigrate;
     }
 
     /**
-     * @see Flyway#getBaselineVersion()
+     * @see FluentConfiguration#getBaselineVersion()
      */
     public String getBaseLineVersion() {
         return baseLineVersion;
     }
 
     /**
-     * @see Flyway#setBaselineVersion(MigrationVersion)
+     * @see FluentConfiguration#baselineVersion(String)
      */
     public void setBaseLineVersion(String baseLineVersion) {
         this.baseLineVersion = baseLineVersion;
     }
 
     /**
-     * @see Flyway#isCleanDisabled()
+     * @see FluentConfiguration#isCleanDisabled()
      */
     public boolean isCleanDisabled() {
         return cleanDisabled;
     }
 
     /**
-     * @see Flyway#setCleanDisabled(boolean)
+     * @see FluentConfiguration#cleanDisabled(boolean)
      */
     public void setCleanDisabled(boolean cleanDisabled) {
         this.cleanDisabled = cleanDisabled;
     }
 
     /**
-     * @see Flyway#isGroup()
+     * @see FluentConfiguration#isGroup()
      */
     public boolean isGroup() {
         return group;
     }
 
     /**
-     * @see Flyway#setGroup(boolean)
+     * @see FluentConfiguration#group(boolean)
      */
     public void setGroup(boolean group) {
         this.group = group;
     }
 
     /**
-     * @see Flyway#isIgnoreFutureMigrations()
+     * @see FluentConfiguration#isIgnoreFutureMigrations()
      */
     public boolean isIgnoreFutureMigrations() {
         return ignoreFutureMigrations;
     }
 
     /**
-     * @see Flyway#setIgnoreFutureMigrations(boolean)
+     * @see FluentConfiguration#ignoreFutureMigrations(boolean)
      */
     public void setIgnoreFutureMigrations(boolean ignoreFutureMigrations) {
         this.ignoreFutureMigrations = ignoreFutureMigrations;
     }
 
     /**
-     * @see Flyway#isIgnoreIgnoredMigrations()
+     * @see FluentConfiguration#isIgnoreIgnoredMigrations()
      */
     public boolean isIgnoreIgnoredMigrations() {
         return ignoreIgnoredMigrations;
     }
 
     /**
-     * @see Flyway#setIgnoreIgnoredMigrations(boolean)
+     * @see FluentConfiguration#ignoreIgnoredMigrations(boolean)
      */
     public void setIgnoreIgnoredMigrations(boolean ignoreIgnoredMigrations) {
         this.ignoreIgnoredMigrations = ignoreIgnoredMigrations;
     }
 
     /**
-     * @see Flyway#isIgnoreMissingMigrations()
+     * @see FluentConfiguration#isIgnoreMissingMigrations()
      */
     public boolean isIgnoreMissingMigrations() {
         return ignoreMissingMigrations;
     }
 
     /**
-     * @see Flyway#setIgnoreMissingMigrations(boolean)
+     * @see FluentConfiguration#ignoreMissingMigrations(boolean)
      */
     public void setIgnoreMissingMigrations(boolean ignoreMissingMigrations) {
         this.ignoreMissingMigrations = ignoreMissingMigrations;
     }
 
     /**
-     * @see Flyway#getInstalledBy()
+     * @see FluentConfiguration#getInstalledBy()
      */
     public String getInstalledBy() {
         return installedBy;
     }
 
     /**
-     * @see Flyway#setInstalledBy(String)
+     * @see FluentConfiguration#installedBy(String)
      */
     public void setInstalledBy(String installedBy) {
         this.installedBy = installedBy;
     }
 
     /**
-     * @see Flyway#isMixed()
+     * @see FluentConfiguration#isMixed()
      */
     public boolean isMixed() {
         return mixed;
     }
 
     /**
-     * @see Flyway#setMixed(boolean)
+     * @see FluentConfiguration#mixed(boolean)
      */
     public void setMixed(boolean mixed) {
         this.mixed = mixed;
     }
 
     /**
-     * @see Flyway#isPlaceholderReplacement()
+     * @see FluentConfiguration#isPlaceholderReplacement()
      */
     public boolean isPlaceholderReplacement() {
         return placeholderReplacement;
     }
 
     /**
-     * @see Flyway#setPlaceholderReplacement(boolean)
+     * @see FluentConfiguration#placeholderReplacement(boolean)
      */
     public void setPlaceholderReplacement(boolean placeholderReplacement) {
         this.placeholderReplacement = placeholderReplacement;
     }
 
     /**
-     * @see Flyway#isSkipDefaultCallbacks()
+     * @see FluentConfiguration#isSkipDefaultCallbacks()
      */
     public boolean isSkipDefaultCallbacks() {
         return skipDefaultCallbacks;
     }
 
     /**
-     * @see Flyway#setSkipDefaultCallbacks(boolean)
+     * @see FluentConfiguration#skipDefaultCallbacks(boolean)
      */
     public void setSkipDefaultCallbacks(boolean skipDefaultCallbacks) {
         this.skipDefaultCallbacks = skipDefaultCallbacks;
     }
 
     /**
-     * @see Flyway#isSkipDefaultResolvers()
+     * @see FluentConfiguration#isSkipDefaultResolvers()
      */
     public boolean isSkipDefaultResolvers() {
         return skipDefaultResolvers;
     }
 
     /**
-     * @see Flyway#setSkipDefaultResolvers(boolean)
+     * @see FluentConfiguration#skipDefaultResolvers(boolean)
      */
     public void setSkipDefaultResolvers(boolean skipDefaultResolvers) {
         this.skipDefaultResolvers = skipDefaultResolvers;
@@ -529,7 +523,7 @@ public class FlywayFactory {
     // Commercial Features
 
     /**
-     * @see Flyway#isBatch() (String)
+     * @see FluentConfiguration#isBatch()
      */
     @Nullable
     public Boolean isBatch() {
@@ -537,14 +531,14 @@ public class FlywayFactory {
     }
 
     /**
-     * @see Flyway#setBatch(boolean) (String)
+     * @see FluentConfiguration#batch(boolean)
      */
     public void setBatch(@Nullable Boolean batch) {
         this.batch = batch;
     }
 
     /**
-     * @see Flyway#getDryRunOutput() (String)
+     * @see FluentConfiguration#getDryRunOutput()
      */
     @Nullable
     public File getDryRunOutputFile() {
@@ -552,29 +546,14 @@ public class FlywayFactory {
     }
 
     /**
-     * @see Flyway#setDryRunOutputAsFile(File)
+     * @see FluentConfiguration#dryRunOutput(File)
      */
     public void setDryRunOutputFile(@Nullable File dryRunOutputFile) {
         this.dryRunOutputFile = dryRunOutputFile;
     }
 
     /**
-     * @see Flyway#getErrorHandlers() (String)
-     */
-    @Nullable
-    public List<String> getErrorHandlers() {
-        return errorHandlers;
-    }
-
-    /**
-     * @see Flyway#setErrorHandlers(ErrorHandler...)
-     */
-    public void setErrorHandlers(@Nullable List<String> errorHandlers) {
-        this.errorHandlers = errorHandlers;
-    }
-
-    /**
-     * @see Flyway#getErrorOverrides()
+     * @see FluentConfiguration#getErrorOverrides()
      */
     @Nullable
     public List<String> getErrorOverrides() {
@@ -582,14 +561,14 @@ public class FlywayFactory {
     }
 
     /**
-     * @see Flyway#setErrorOverrides(String...)
+     * @see FluentConfiguration#errorOverrides(String...)
      */
     public void setErrorOverrides(@Nullable List<String> errorOverrides) {
         this.errorOverrides = errorOverrides;
     }
 
     /**
-     * @see Flyway#isOracleSqlplus()
+     * @see FluentConfiguration#isOracleSqlplus()
      */
     @Nullable
     public Boolean isOracleSqlPlus() {
@@ -597,14 +576,14 @@ public class FlywayFactory {
     }
 
     /**
-     * @see Flyway#setOracleSqlplus(boolean)
+     * @see FluentConfiguration#oracleSqlplus(boolean)
      */
     public void setOracleSqlPlus(@Nullable Boolean oracleSqlPlus) {
         this.oracleSqlPlus = oracleSqlPlus;
     }
 
     /**
-     * @see Flyway#isStream()
+     * @see FluentConfiguration#isStream()
      */
     @Nullable
     public Boolean isStream() {
@@ -612,14 +591,14 @@ public class FlywayFactory {
     }
 
     /**
-     * @see Flyway#setStream(boolean)
+     * @see FluentConfiguration#stream(boolean)
      */
     public void setStream(@Nullable Boolean stream) {
         this.stream = stream;
     }
 
     /**
-     * @see Flyway#getTarget()
+     * @see FluentConfiguration#getTarget()
      */
     @Nullable
     public String getTarget() {
@@ -627,14 +606,14 @@ public class FlywayFactory {
     }
 
     /**
-     * @see Flyway#setTarget(MigrationVersion)
+     * @see FluentConfiguration#target(String)
      */
     public void setTarget(@Nullable String target) {
         this.target = target;
     }
 
     /**
-     * @see Flyway#getUndoSqlMigrationPrefix()
+     * @see FluentConfiguration#getUndoSqlMigrationPrefix()
      */
     @Nullable
     public String getUndoSqlMigrationPrefix() {
@@ -642,7 +621,7 @@ public class FlywayFactory {
     }
 
     /**
-     * @see Flyway#setUndoSqlMigrationPrefix(String)
+     * @see FluentConfiguration#undoSqlMigrationPrefix(String)
      */
     public void setUndoSqlMigrationPrefix(@Nullable String undoSqlMigrationPrefix) {
         this.undoSqlMigrationPrefix = undoSqlMigrationPrefix;
