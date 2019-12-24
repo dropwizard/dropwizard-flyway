@@ -11,7 +11,7 @@ Dropwizard Flyway
 Usage
 -----
 
-Just add the `FlywayBundle` to your Dropwizard application inside the [`Application#initialize`](http://dropwizard.io/1.3.0/dropwizard-core/apidocs/io/dropwizard/Application.html#initialize%28io.dropwizard.setup.Bootstrap%29) method.
+Just add the `FlywayBundle` to your Dropwizard application inside the [`Application#initialize`](https://javadoc.io/static/io.dropwizard/dropwizard-core/2.0.0/io/dropwizard/Application.html#initialize-io.dropwizard.setup.Bootstrap-) method.
 
     @Override
     public void initialize(Bootstrap<MyConfiguration> bootstrap) {
@@ -41,15 +41,15 @@ After that you can use one of the following Flyway commands:
 | `db init`     | Creates and initializes the metadata table (existing database)               |
 | `db repair`   | Repairs the metadata table                                                   |
 
-The [Flyway migrations](http://flywaydb.org/documentation/migration/) must be accessible in the classpath under `db/migration` (or any other path configured with the `locations` parameter, see [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/1.3.0-5/apidocs/io/dropwizard/flyway/FlywayFactory.html)).
+The [Flyway migrations](http://flywaydb.org/documentation/migration/) must be accessible in the classpath under `db/migration` (or any other path configured with the `locations` parameter, see [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/2.0.0-1/apidocs/io/dropwizard/flyway/FlywayFactory.html)).
 
 
 Configuration
 -------------
 
-`dropwizard-flyway` is using the standard [DataSourceFactory](http://dropwizard.io/1.3.0/dropwizard-db/apidocs/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](http://dropwizard.io/1.3.0/dropwizard-db/) for configuring its [DataSource](http://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html).
+`dropwizard-flyway` is using the standard [DataSourceFactory](https://javadoc.io/static/io.dropwizard/dropwizard-db/2.0.0/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](https://javadoc.io/doc/io.dropwizard/dropwizard-db/2.0.0/index.html) for configuring its [DataSource](http://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html).
 
-Additionally you can override the following configuration settings of Flyway using [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/1.3.0-5/apidocs/io/dropwizard/flyway/FlywayFactory.html):
+Additionally you can override the following configuration settings of Flyway using [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/2.0.0-1/apidocs/io/dropwizard/flyway/FlywayFactory.html):
 
     flyway:
       # The encoding of SQL migrations. (default: UTF-8) 
@@ -203,7 +203,7 @@ This project is available on Maven Central. To add it to your project simply add
     <dependency>
       <groupId>io.dropwizard.modules</groupId>
       <artifactId>dropwizard-flyway</artifactId>
-      <version>1.3.0-5</version>
+      <version>2.0.0-1</version>
     </dependency>
 
 
