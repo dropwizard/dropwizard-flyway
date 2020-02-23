@@ -54,6 +54,9 @@ Additionally you can override the following configuration settings of Flyway usi
     flyway:
       # The encoding of SQL migrations. (default: UTF-8) 
       encoding: UTF-8
+
+      # The default schema managed by Flyway. (default: the first schema listed in schemas)
+      defaultSchema:
       
       # The schemas managed by Flyway. (default: default schema of the connection)
       schemas:
