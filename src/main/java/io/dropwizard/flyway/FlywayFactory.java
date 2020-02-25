@@ -21,6 +21,7 @@ public class FlywayFactory {
     @NotEmpty
     private String encoding = StandardCharsets.UTF_8.name();
     @JsonProperty
+    @Nullable
     private String defaultSchema = null;
     @JsonProperty
     @NotNull
@@ -133,6 +134,7 @@ public class FlywayFactory {
     /**
      * @see FluentConfiguration#getDefaultSchema()
      */
+    @Nullable
     public String getDefaultSchema() {
         return defaultSchema;
     }
@@ -140,7 +142,7 @@ public class FlywayFactory {
     /**
      * @see FluentConfiguration#defaultSchema(String)
      */
-    public void setDefaultSchema(final String defaultSchema) {
+    public void setDefaultSchema(@Nullable final String defaultSchema) {
         this.defaultSchema = defaultSchema;
     }
 
@@ -659,7 +661,6 @@ public class FlywayFactory {
               .baselineVersion(baseLineVersion)
               .callbacks(callbacks.toArray(emptyStringArray))
               .cleanDisabled(cleanDisabled)
-              .defaultSchema(defaultSchema)
               .encoding(encoding)
               .group(group)
               .ignoreFutureMigrations(ignoreFutureMigrations)
@@ -683,6 +684,10 @@ public class FlywayFactory {
               .sqlMigrationSuffixes(sqlMigrationSuffixes.toArray(emptyStringArray))
               .table(metaDataTableName)
               .validateOnMigrate(validateOnMigrate);
+
+        if (defaultSchema != null) {
+            flyway.defaultSchema(defaultSchema);
+        }
 
         // Commercial features
         if (batch != null) {
