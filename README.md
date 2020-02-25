@@ -219,7 +219,7 @@ Please file bug reports and feature requests in [GitHub issues](https://github.c
 License
 -------
 
-Copyright (c) 2014-2019 Jochen Schalanda, Dropwizard Team
+Copyright (c) 2014-2020 Jochen Schalanda, Dropwizard Team
 
 This library is licensed under the Apache License, Version 2.0.
 
