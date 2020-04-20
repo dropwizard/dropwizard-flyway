@@ -3,6 +3,7 @@ package io.dropwizard.flyway.cli;
 import io.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
+import io.dropwizard.flyway.FlywayFactory;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.flywaydb.core.Flyway;
@@ -41,6 +42,11 @@ public class DbCommand<T extends Configuration> extends AbstractFlywayCommand<T>
                     .description(subCommand.getDescription());
             subCommand.configure(cmdParser);
         }
+    }
+
+    @Override
+    protected void setAdditionalOptions(FlywayFactory flywayFactory, Namespace namespace) {
+        subCommands.get(namespace.getString(COMMAND_NAME_ATTR)).setAdditionalOptions(flywayFactory, namespace);
     }
 
     @Override

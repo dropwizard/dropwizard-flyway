@@ -6,7 +6,7 @@ import io.dropwizard.db.DatabaseConfiguration;
 import net.sourceforge.argparse4j.inf.Namespace;
 import org.flywaydb.core.Flyway;
 
-public class DbCleanCommand<T extends Configuration> extends AbstractFlywayCommand<T> {
+public class DbCleanCommand<T extends Configuration> extends NoOptionsFlywayCommand<T> {
     public DbCleanCommand(final DatabaseConfiguration<T> databaseConfiguration,
                           final FlywayConfiguration<T> flywayConfiguration,
                           final Class<T> configurationClass) {

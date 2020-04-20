@@ -8,7 +8,7 @@ import org.flywaydb.core.Flyway;
 
 import static org.flywaydb.core.internal.info.MigrationInfoDumper.dumpToAsciiTable;
 
-public class DbInfoCommand<T extends Configuration> extends AbstractFlywayCommand<T> {
+public class DbInfoCommand<T extends Configuration> extends NoOptionsFlywayCommand<T> {
     public DbInfoCommand(final DatabaseConfiguration<T> databaseConfiguration,
                          final FlywayConfiguration<T> flywayConfiguration,
                          final Class<T> configurationClass) {

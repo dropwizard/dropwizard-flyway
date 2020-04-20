@@ -6,7 +6,7 @@ import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
 import net.sourceforge.argparse4j.inf.Namespace;
 
-public class DbInitCommand<T extends Configuration> extends AbstractFlywayCommand<T> {
+public class DbInitCommand<T extends Configuration> extends NoOptionsFlywayCommand<T> {
     public DbInitCommand(final DatabaseConfiguration<T> databaseConfiguration,
                          final FlywayConfiguration<T> flywayConfiguration,
                          final Class<T> configurationClass) {

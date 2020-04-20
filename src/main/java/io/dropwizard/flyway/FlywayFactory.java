@@ -75,6 +75,8 @@ public class FlywayFactory {
     @JsonProperty
     private boolean cleanDisabled = false;
     @JsonProperty
+    private boolean cleanOnValidationError = false;
+    @JsonProperty
     private boolean group = false;
     @JsonProperty
     private boolean ignoreFutureMigrations = true;
@@ -413,6 +415,20 @@ public class FlywayFactory {
     }
 
     /**
+     * @see FluentConfiguration#isCleanOnValidationError() 
+     */
+    public boolean isCleanOnValidationError() {
+        return cleanOnValidationError;
+    }
+
+    /**
+     * @see FluentConfiguration#cleanOnValidationError(boolean) ()
+     */
+    public void setCleanOnValidationError(boolean cleanOnValidationError) {
+        this.cleanOnValidationError = cleanOnValidationError;
+    }
+
+    /**
      * @see FluentConfiguration#isGroup()
      */
     public boolean isGroup() {
@@ -661,6 +677,7 @@ public class FlywayFactory {
               .baselineVersion(baseLineVersion)
               .callbacks(callbacks.toArray(emptyStringArray))
               .cleanDisabled(cleanDisabled)
+              .cleanOnValidationError(cleanOnValidationError)
               .encoding(encoding)
               .group(group)
               .ignoreFutureMigrations(ignoreFutureMigrations)
