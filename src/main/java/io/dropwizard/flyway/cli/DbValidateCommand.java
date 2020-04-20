@@ -3,6 +3,8 @@ package io.dropwizard.flyway.cli;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
 import io.dropwizard.flyway.FlywayConfiguration;
+import io.dropwizard.flyway.FlywayFactory;
+import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.flywaydb.core.Flyway;
@@ -27,11 +29,13 @@ public class DbValidateCommand<T extends Configuration> extends AbstractFlywayCo
         super.configure(subparser);
 
         subparser.addArgument("--" + OUT_OF_ORDER)
+                .action(Arguments.storeConst()).setConst(Boolean.TRUE)
                 .dest(OUT_OF_ORDER)
                 .help("Allows migrations to be run \"out of order\". " +
                         "If you already have versions 1 and 3 applied, and now a version 2 is found, it will be applied too instead of being ignored.");
 
         subparser.addArgument("--" + CLEAN_ON_VALIDATION_ERROR)
+                .action(Arguments.storeConst()).setConst(Boolean.TRUE)
                 .dest(CLEAN_ON_VALIDATION_ERROR)
                 .help("Whether to automatically call clean or not when a validation error occurs. " +
                         "This is exclusively intended as a convenience for development. " +
@@ -41,22 +45,22 @@ public class DbValidateCommand<T extends Configuration> extends AbstractFlywayCo
     }
 
     @Override
-    protected void run(final Namespace namespace, final Flyway flyway) throws Exception {
-        final Boolean namespaceBoolean = namespace.getBoolean(OUT_OF_ORDER);
+    protected void setAdditionalOptions(FlywayFactory flywayFactory, Namespace namespace) {
+        final Boolean outOfOrder = namespace.getBoolean(OUT_OF_ORDER);
         final Boolean cleanOnValidationError = namespace.getBoolean(CLEAN_ON_VALIDATION_ERROR);
-
-        FluentConfiguration config = Flyway.configure(flyway.getConfiguration().getClassLoader()).configuration(flyway.getConfiguration());
         
-        if (namespaceBoolean != null) {
-            config.outOfOrder(namespaceBoolean);
+        if (outOfOrder != null) {
+            flywayFactory.setOutOfOrder(outOfOrder);
         }
-
+    
         if (cleanOnValidationError != null) {
-            config.cleanOnValidationError(cleanOnValidationError);
+            flywayFactory.setCleanOnValidationError(cleanOnValidationError);
         }
+    
+    }
 
-        Flyway customFlyway = config.load();
-        
-        customFlyway.validate();
+    @Override
+    protected void run(final Namespace namespace, final Flyway flyway) throws Exception {
+        flyway.validate();
     }
 }

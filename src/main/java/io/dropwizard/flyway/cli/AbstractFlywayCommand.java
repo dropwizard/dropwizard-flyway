@@ -39,6 +39,10 @@ abstract class AbstractFlywayCommand<T extends Configuration> extends Configured
     protected void run(final Bootstrap<T> bootstrap, final Namespace namespace, final T configuration) throws Exception {
         final PooledDataSourceFactory datasourceFactory = databaseConfiguration.getDataSourceFactory(configuration);
         final FlywayFactory flywayFactory = flywayConfiguration.getFlywayFactory(configuration);
+
+        // Give subclasses an option to set additional config flags for flyway.
+        setAdditionalOptions(flywayFactory, namespace);
+        
         final Flyway flyway = flywayFactory.build(datasourceFactory.build(bootstrap.getMetricRegistry(), "Flyway"));
 
         try {
@@ -48,6 +52,7 @@ abstract class AbstractFlywayCommand<T extends Configuration> extends Configured
             throw e;
         }
     }
-
+    
+    protected abstract void setAdditionalOptions(FlywayFactory flywayFactory, Namespace namespace);
     protected abstract void run(final Namespace namespace, final Flyway flyway) throws Exception;
 }

@@ -3,6 +3,7 @@ package io.dropwizard.flyway.cli;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
 import io.dropwizard.flyway.FlywayConfiguration;
+import io.dropwizard.flyway.FlywayFactory;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 import net.sourceforge.argparse4j.impl.Arguments;
@@ -65,33 +66,32 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
     }
 
     @Override
-    public void run(final Namespace namespace, final Flyway flyway) throws Exception {
+    protected void setAdditionalOptions(FlywayFactory flywayFactory, Namespace namespace) {
         final Boolean outOfOrder = namespace.getBoolean(OUT_OF_ORDER);
         final Boolean validateOnMigrate = namespace.getBoolean(VALIDATE_ON_MIGRATE);
         final Boolean cleanOnValidationError = namespace.getBoolean(CLEAN_ON_VALIDATION_ERROR);
         final Boolean baselineOnMigrate = namespace.getBoolean(INIT_ON_MIGRATE);
 
-        FluentConfiguration config = Flyway.configure(flyway.getConfiguration().getClassLoader()).configuration(flyway.getConfiguration());
-        
         if (outOfOrder != null) {
-            config.outOfOrder(outOfOrder);
+            flywayFactory.setOutOfOrder(outOfOrder);
         }
 
         if (validateOnMigrate != null) {
-            config.validateOnMigrate(validateOnMigrate);
+            flywayFactory.setValidateOnMigrate(validateOnMigrate);
         }
 
         if (cleanOnValidationError != null) {
-            config.cleanOnValidationError(cleanOnValidationError);
+            flywayFactory.setCleanOnValidationError(cleanOnValidationError);
         }
 
         if (baselineOnMigrate != null) {
-            config.baselineOnMigrate(baselineOnMigrate);
+            flywayFactory.setBaselineOnMigrate(baselineOnMigrate);
         }
+    }
 
-        Flyway customFlyway = config.load();
-        
-        final int successfulMigrations = customFlyway.migrate();
+    @Override
+    public void run(final Namespace namespace, final Flyway flyway) throws Exception {
+        final int successfulMigrations = flyway.migrate();
         LOG.debug("{} successful migrations applied", successfulMigrations);
     }
 }
