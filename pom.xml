@@ -64,7 +64,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <dropwizard.version>2.0.9</dropwizard.version>
+        <dropwizard.version>2.0.10</dropwizard.version>
         <flyway.version>6.4.2</flyway.version>
     </properties>
 
