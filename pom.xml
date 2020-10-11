@@ -64,6 +64,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <sonar.projectKey>dropwizard_dropwizard-flyway</sonar.projectKey>
+        <sonar.organization>dropwizard</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
         <dropwizard.version>2.0.13</dropwizard.version>
         <flyway.version>6.5.7</flyway.version>
     </properties>
@@ -220,6 +225,11 @@
                     <version>1.6.8</version>
                     <extensions>true</extensions>
                 </plugin>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>3.7.0.1746</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -265,6 +275,12 @@
                         <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
