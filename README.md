@@ -3,7 +3,7 @@ Dropwizard Flyway
 
 [![Build Status](https://travis-ci.org/dropwizard/dropwizard-flyway.svg?branch=master)](https://travis-ci.org/dropwizard/dropwizard-flyway)
 [![Coverage Status](https://img.shields.io/coveralls/dropwizard/dropwizard-flyway.svg)](https://coveralls.io/r/dropwizard/dropwizard-flyway)
-[![Maven Central](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway.svg)](http://mvnrepository.com/artifact/io.dropwizard.modules/dropwizard-flyway)
+[![Maven Central](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway.svg)](https://search.maven.org/artifact/io.dropwizard.modules/dropwizard-flyway)
 
 `dropwizard-flyway` is a set of commands using [Flyway](http://www.flywaydb.org/) for database migrations in [Dropwizard](http://dropwizard.io/) applications.
 
@@ -201,12 +201,16 @@ Additionally you can override the following configuration settings of Flyway usi
 Maven Artifacts
 ---------------
 
+![dropwizard-flyway 1.3.x](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway/1.3)
+![dropwizard-flyway 2.0.x](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway/2.0)
+
 This project is available on Maven Central. To add it to your project simply add the following dependencies to your `pom.xml`:
+
 
     <dependency>
       <groupId>io.dropwizard.modules</groupId>
       <artifactId>dropwizard-flyway</artifactId>
-      <version>2.0.0-1</version>
+      <version>${dropwizard-flyway.version}</version>
     </dependency>
 
 
@@ -219,7 +223,7 @@ Please file bug reports and feature requests in [GitHub issues](https://github.c
 License
 -------
 
-Copyright (c) 2014-2019 Jochen Schalanda, Dropwizard Team
+Copyright (c) 2014-2020 Jochen Schalanda, Dropwizard Team
 
 This library is licensed under the Apache License, Version 2.0.
 
