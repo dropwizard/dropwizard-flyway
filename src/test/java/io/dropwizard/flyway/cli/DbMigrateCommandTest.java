@@ -1,12 +1,27 @@
 package io.dropwizard.flyway.cli;
 
+import org.flywaydb.core.api.output.MigrateResult;
+import org.flywaydb.core.internal.license.VersionPrinter;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class DbMigrateCommandTest extends AbstractCommandTest {
+    private MigrateResult migrateResult;
+
+    @BeforeEach
+    void setUpFlyway() {
+        migrateResult = new MigrateResult(VersionPrinter.getVersion(), "db", "schema");
+        migrateResult.initialSchemaVersion = "initial";
+        migrateResult.targetSchemaVersion = "target";
+        migrateResult.migrationsExecuted = 23;
+
+        when(mockFlyway.migrate()).thenReturn(migrateResult);
+    }
 
     @Test
     public void testDefaultArguments() {
@@ -16,6 +31,16 @@ public class DbMigrateCommandTest extends AbstractCommandTest {
         verify(mockFlywayFactory, never()).setOutOfOrder(anyBoolean());
         verify(mockFlywayFactory, never()).setValidateOnMigrate(anyBoolean());
         verify(mockFlywayFactory, never()).setCleanOnValidationError(anyBoolean());
+        verify(mockFlyway).migrate();
+    }
+
+    @Test
+    public void testDefaultArgumentsWithWarnings() {
+        migrateResult.warnings.add("warning1");
+        migrateResult.warnings.add("warning2");
+
+        cli.run("db", "migrate");
+
         verify(mockFlyway).migrate();
     }
 
