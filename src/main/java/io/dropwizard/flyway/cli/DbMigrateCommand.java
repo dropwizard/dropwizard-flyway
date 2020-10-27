@@ -4,15 +4,13 @@ import io.dropwizard.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
 import io.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.flyway.FlywayFactory;
+import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
-import net.sourceforge.argparse4j.impl.Arguments;
 import org.flywaydb.core.Flyway;
-import org.flywaydb.core.api.configuration.FluentConfiguration;
+import org.flywaydb.core.api.output.MigrateResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static net.sourceforge.argparse4j.impl.Arguments.storeTrue;
 
 public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCommand<T> {
 
@@ -91,7 +89,17 @@ public class DbMigrateCommand<T extends Configuration> extends AbstractFlywayCom
 
     @Override
     public void run(final Namespace namespace, final Flyway flyway) throws Exception {
-        final int successfulMigrations = flyway.migrate();
-        LOG.debug("{} successful migrations applied", successfulMigrations);
+        final MigrateResult migrateResult = flyway.migrate();
+        LOG.debug("Executed {} migrations to migrate {} in database {} from schema {} -> {}",
+                migrateResult.migrationsExecuted, migrateResult.schemaName, migrateResult.database,
+                migrateResult.initialSchemaVersion, migrateResult.targetSchemaVersion);
+
+        if (!migrateResult.warnings.isEmpty()) {
+            LOG.warn("{} warnings when migrating {} in database {} from schema {} -> {}: {}",
+                    migrateResult.warnings.size(), migrateResult.schemaName, migrateResult.database,
+                    migrateResult.initialSchemaVersion, migrateResult.targetSchemaVersion,
+                    migrateResult.warnings
+            );
+        }
     }
 }
