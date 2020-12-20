@@ -1,8 +1,8 @@
 Dropwizard Flyway
 =================
 
-[![Build Status](https://travis-ci.org/dropwizard/dropwizard-flyway.svg?branch=master)](https://travis-ci.org/dropwizard/dropwizard-flyway)
-[![Coverage Status](https://img.shields.io/coveralls/dropwizard/dropwizard-flyway.svg)](https://coveralls.io/r/dropwizard/dropwizard-flyway)
+[![Build](https://github.com/dropwizard/dropwizard-flyway/workflows/Build/badge.svg)](https://github.com/dropwizard/dropwizard-flyway/actions?query=workflow%3ABuild)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dropwizard_dropwizard-flyway&metric=alert_status)](https://sonarcloud.io/dashboard?id=dropwizard_dropwizard-flyway)
 [![Maven Central](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway.svg)](https://search.maven.org/artifact/io.dropwizard.modules/dropwizard-flyway)
 
 `dropwizard-flyway` is a set of commands using [Flyway](http://www.flywaydb.org/) for database migrations in [Dropwizard](http://dropwizard.io/) applications.
