@@ -85,6 +85,8 @@ public class FlywayFactory {
     @JsonProperty
     private boolean ignoreMissingMigrations = false;
     @JsonProperty
+    private boolean ignorePendingMigrations = false;
+    @JsonProperty
     @NotNull
     private String installedBy = "";
     @JsonProperty
@@ -484,6 +486,21 @@ public class FlywayFactory {
         this.ignoreMissingMigrations = ignoreMissingMigrations;
     }
 
+
+    /**
+     * @see FluentConfiguration#ignorePendingMigrations(boolean)
+     */
+    public boolean isIgnorePendingMigrations() {
+        return ignorePendingMigrations;
+    }
+
+    /**
+     * @see FluentConfiguration#ignorePendingMigrations(boolean)
+     */
+    public void setIgnorePendingMigrations(boolean ignorePendingMigrations) {
+        this.ignorePendingMigrations = ignorePendingMigrations;
+    }
+
     /**
      * @see FluentConfiguration#getInstalledBy()
      */
@@ -683,6 +700,7 @@ public class FlywayFactory {
               .ignoreFutureMigrations(ignoreFutureMigrations)
               .ignoreIgnoredMigrations(ignoreIgnoredMigrations)
               .ignoreMissingMigrations(ignoreMissingMigrations)
+              .ignorePendingMigrations(ignorePendingMigrations)
               .installedBy(installedBy)
               .locations(locations.toArray(emptyStringArray))
               .mixed(mixed)
