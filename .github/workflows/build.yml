@@ -33,7 +33,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
     - name: Cache SonarCloud packages
-      if: matrix.java_version == '11'
+      if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.java_version == '11' }}
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       uses: actions/cache@v2.1.5
       with:
         path: ~/.sonar/cache
@@ -42,7 +44,7 @@ jobs:
     - name: Build
       run: ./mvnw -B -V -ntp install
     - name: Analyze with SonarCloud
-      if: matrix.java_version == '11'
+      if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.java_version == '11' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
