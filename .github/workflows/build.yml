@@ -18,14 +18,14 @@ jobs:
       uses: joschi/setup-jdk@v2.4.0
       with:
         java-version: ${{ matrix.java_version }}
-    - uses: actions/cache@v2.1.6
+    - uses: actions/cache@v2.1.7
       if: runner.os != 'Windows'
       with:
         path: ~/.m2
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
-    - uses: actions/cache@v2.1.6
+    - uses: actions/cache@v2.1.7
       if: runner.os == 'Windows'
       with:
         path: ~/.m2
@@ -36,7 +36,7 @@ jobs:
       if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.java_version == '11' }}
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      uses: actions/cache@v2.1.6
+      uses: actions/cache@v2.1.7
       with:
         path: ~/.sonar/cache
         key: ${{ runner.os }}-sonar
