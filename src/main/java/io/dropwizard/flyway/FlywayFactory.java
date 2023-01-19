@@ -2,10 +2,11 @@ package io.dropwizard.flyway;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
 
-import javax.annotation.Nullable;
 import javax.sql.DataSource;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -79,13 +80,7 @@ public class FlywayFactory {
     @JsonProperty
     private boolean group = false;
     @JsonProperty
-    private boolean ignoreFutureMigrations = true;
-    @JsonProperty
-    private boolean ignoreIgnoredMigrations = false;
-    @JsonProperty
-    private boolean ignoreMissingMigrations = false;
-    @JsonProperty
-    private boolean ignorePendingMigrations = false;
+    private List<String> ignoreMigrationPatterns = Collections.singletonList("*:future");
     @JsonProperty
     @NotNull
     private String installedBy = "";
@@ -417,7 +412,7 @@ public class FlywayFactory {
     }
 
     /**
-     * @see FluentConfiguration#isCleanOnValidationError() 
+     * @see FluentConfiguration#isCleanOnValidationError()
      */
     public boolean isCleanOnValidationError() {
         return cleanOnValidationError;
@@ -445,60 +440,17 @@ public class FlywayFactory {
     }
 
     /**
-     * @see FluentConfiguration#isIgnoreFutureMigrations()
+     * @see FluentConfiguration#getIgnoreMigrationPatterns()
      */
-    public boolean isIgnoreFutureMigrations() {
-        return ignoreFutureMigrations;
+    public List<String> getIgnoreMigrationPatterns() {
+        return ignoreMigrationPatterns;
     }
 
     /**
-     * @see FluentConfiguration#ignoreFutureMigrations(boolean)
+     * @see FluentConfiguration#ignoreMigrationPatterns(String...)
      */
-    public void setIgnoreFutureMigrations(boolean ignoreFutureMigrations) {
-        this.ignoreFutureMigrations = ignoreFutureMigrations;
-    }
-
-    /**
-     * @see FluentConfiguration#isIgnoreIgnoredMigrations()
-     */
-    public boolean isIgnoreIgnoredMigrations() {
-        return ignoreIgnoredMigrations;
-    }
-
-    /**
-     * @see FluentConfiguration#ignoreIgnoredMigrations(boolean)
-     */
-    public void setIgnoreIgnoredMigrations(boolean ignoreIgnoredMigrations) {
-        this.ignoreIgnoredMigrations = ignoreIgnoredMigrations;
-    }
-
-    /**
-     * @see FluentConfiguration#isIgnoreMissingMigrations()
-     */
-    public boolean isIgnoreMissingMigrations() {
-        return ignoreMissingMigrations;
-    }
-
-    /**
-     * @see FluentConfiguration#ignoreMissingMigrations(boolean)
-     */
-    public void setIgnoreMissingMigrations(boolean ignoreMissingMigrations) {
-        this.ignoreMissingMigrations = ignoreMissingMigrations;
-    }
-
-
-    /**
-     * @see FluentConfiguration#ignorePendingMigrations(boolean)
-     */
-    public boolean isIgnorePendingMigrations() {
-        return ignorePendingMigrations;
-    }
-
-    /**
-     * @see FluentConfiguration#ignorePendingMigrations(boolean)
-     */
-    public void setIgnorePendingMigrations(boolean ignorePendingMigrations) {
-        this.ignorePendingMigrations = ignorePendingMigrations;
+    public void setIgnoreMigrationPatterns(final List<String> ignoreMigrationPatterns) {
+        this.ignoreMigrationPatterns = ignoreMigrationPatterns;
     }
 
     /**
@@ -697,10 +649,7 @@ public class FlywayFactory {
               .cleanOnValidationError(cleanOnValidationError)
               .encoding(encoding)
               .group(group)
-              .ignoreFutureMigrations(ignoreFutureMigrations)
-              .ignoreIgnoredMigrations(ignoreIgnoredMigrations)
-              .ignoreMissingMigrations(ignoreMissingMigrations)
-              .ignorePendingMigrations(ignorePendingMigrations)
+              .ignoreMigrationPatterns(ignoreMigrationPatterns.toArray(emptyStringArray))
               .installedBy(installedBy)
               .locations(locations.toArray(emptyStringArray))
               .mixed(mixed)

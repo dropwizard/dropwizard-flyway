@@ -2,11 +2,11 @@ package io.dropwizard.flyway.cli;
 
 import io.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.flyway.FlywayFactory;
-import io.dropwizard.Configuration;
-import io.dropwizard.cli.ConfiguredCommand;
+import io.dropwizard.core.Configuration;
+import io.dropwizard.core.cli.ConfiguredCommand;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.db.DatabaseConfiguration;
-import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.core.setup.Bootstrap;
 import net.sourceforge.argparse4j.inf.Namespace;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.FlywayException;
@@ -42,7 +42,7 @@ abstract class AbstractFlywayCommand<T extends Configuration> extends Configured
 
         // Give subclasses an option to set additional config flags for flyway.
         setAdditionalOptions(flywayFactory, namespace);
-        
+
         final Flyway flyway = flywayFactory.build(datasourceFactory.build(bootstrap.getMetricRegistry(), "Flyway"));
 
         try {
@@ -52,7 +52,7 @@ abstract class AbstractFlywayCommand<T extends Configuration> extends Configured
             throw e;
         }
     }
-    
+
     protected abstract void setAdditionalOptions(FlywayFactory flywayFactory, Namespace namespace);
     protected abstract void run(final Namespace namespace, final Flyway flyway) throws Exception;
 }

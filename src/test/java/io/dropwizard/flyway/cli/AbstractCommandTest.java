@@ -2,15 +2,15 @@ package io.dropwizard.flyway.cli;
 
 import java.util.Optional;
 
-import io.dropwizard.Application;
-import io.dropwizard.Configuration;
-import io.dropwizard.cli.Cli;
+import io.dropwizard.core.Application;
+import io.dropwizard.core.Configuration;
+import io.dropwizard.core.cli.Cli;
 import io.dropwizard.db.DatabaseConfiguration;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.flyway.FlywayFactory;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Bootstrap;
+import io.dropwizard.core.setup.Environment;
 import io.dropwizard.util.JarLocation;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;

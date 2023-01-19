@@ -4,7 +4,7 @@
 
     <groupId>io.dropwizard.modules</groupId>
     <artifactId>dropwizard-flyway</artifactId>
-    <version>2.1.0-2-SNAPSHOT</version>
+    <version>3.0.0-beta.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Dropwizard Flyway Bundle</name>
@@ -69,8 +69,8 @@
         <sonar.organization>dropwizard</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
-        <dropwizard.version>2.1.4</dropwizard.version>
-        <flyway.version>8.5.13</flyway.version>
+        <dropwizard.version>3.0.0-beta.4</dropwizard.version>
+        <flyway.version>9.11.0</flyway.version>
     </properties>
 
     <dependencyManagement>
@@ -104,8 +104,8 @@
             <version>${flyway.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
+            <groupId>org.checkerframework</groupId>
+            <artifactId>checker-qual</artifactId>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.argparse4j</groupId>

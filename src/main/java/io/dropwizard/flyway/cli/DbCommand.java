@@ -1,7 +1,7 @@
 package io.dropwizard.flyway.cli;
 
 import io.dropwizard.flyway.FlywayConfiguration;
-import io.dropwizard.Configuration;
+import io.dropwizard.core.Configuration;
 import io.dropwizard.db.DatabaseConfiguration;
 import io.dropwizard.flyway.FlywayFactory;
 import net.sourceforge.argparse4j.inf.Namespace;

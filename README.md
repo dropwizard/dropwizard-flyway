@@ -118,20 +118,11 @@ Additionally you can override the following configuration settings of Flyway usi
       # true if migrations should be grouped. false if they should be applied individually instead. (default: false)
       group: false
       
-      # Ignore future migrations when reading the schema history table. These are migrations that were performed by a
-      # newer deployment of the application that are not yet available in this version.
-      # true to continue normally and log a warning, false to fail fast with an exception. (default: true)
-      ignoreFutureMigrations: true
-      
-      # Ignore ignored migrations when reading the schema history table. These are migrations that were added in between
-      # already migrated migrations in this version.
-      # true to continue normally, false to fail fast with an exception. (default: false)
-      ignoreIgnoredMigrations: false
-      
-      # Ignore missing migrations when reading the schema history table. These are migrations that were performed by an
-      # older deployment of the application that are no longer available in this version.
-      # true to continue normally and log a warning, false to fail fast with an exception. (default: false)
-      ignoreMissingMigrations: false
+      # Ignore migrations that match this list of patterns when validating migrations.
+      # Each pattern is of the form : See https://flywaydb.org/documentation/configuration/parameters/ignoreMigrationPatterns for full details 
+      # Example: repeatable:missing,versioned:pending,*:failed (default: *:future)
+      ignoreMigrationPatterns: 
+        - "*:future"
       
       # The username that will be recorded in the schema history table as having applied the migration.
       # <<blank>> for the current database user of the connection. (default: <<blank>>).
