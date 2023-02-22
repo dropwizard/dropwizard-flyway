@@ -195,6 +195,7 @@ Maven Artifacts
 
 ![dropwizard-flyway 1.3.x](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway/1.3)
 ![dropwizard-flyway 2.0.x](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway/2.0)
+![dropwizard-flyway 2.1.x](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway/2.1)
 
 This project is available on Maven Central. To add it to your project simply add the following dependencies to your `pom.xml`:
 
