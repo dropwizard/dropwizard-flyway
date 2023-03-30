@@ -4,7 +4,7 @@
 
     <groupId>io.dropwizard.modules</groupId>
     <artifactId>dropwizard-flyway</artifactId>
-    <version>3.0.0-2-SNAPSHOT</version>
+    <version>4.0.0-1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Dropwizard Flyway Bundle</name>
@@ -63,12 +63,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.release>11</maven.compiler.release>
+        <maven.compiler.parameters>true</maven.compiler.parameters>
 
         <sonar.projectKey>dropwizard_dropwizard-flyway</sonar.projectKey>
         <sonar.organization>dropwizard</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
-        <dropwizard.version>3.0.0</dropwizard.version>
+        <dropwizard.version>4.0.0</dropwizard.version>
         <flyway.version>9.16.1</flyway.version>
     </properties>
 
