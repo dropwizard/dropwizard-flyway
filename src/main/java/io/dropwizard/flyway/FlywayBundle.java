@@ -1,10 +1,10 @@
 package io.dropwizard.flyway;
 
-import io.dropwizard.Configuration;
-import io.dropwizard.ConfiguredBundle;
+import io.dropwizard.core.Configuration;
+import io.dropwizard.core.ConfiguredBundle;
+import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.db.DatabaseConfiguration;
 import io.dropwizard.flyway.cli.DbCommand;
-import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.util.Generics;
 
 public abstract class FlywayBundle<T extends Configuration>
