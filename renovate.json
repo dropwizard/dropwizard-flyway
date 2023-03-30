@@ -1,5 +1,21 @@
 {
   "extends": [
-    "config:base"
-  ]
+    "config:base",
+    "helpers:pinGitHubActionDigests",
+    ":automergePatch",
+    ":automergePr",
+    ":automergeRequireAllStatusChecks",
+    ":prConcurrentLimitNone",
+    ":separatePatchReleases"
+  ],
+  "baseBranches": ["master", "2.1.x", "3.0.x", "4.0.x"],
+  "dependencyDashboard": true,
+  "labels": ["dependencies"],
+  "platformAutomerge": true,
+  "schedule": [
+    "before 2am"
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  }
 }
