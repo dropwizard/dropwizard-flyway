@@ -1,12 +1,12 @@
 package io.dropwizard.flyway.cli;
 
+import io.dropwizard.core.Configuration;
+import io.dropwizard.core.cli.ConfiguredCommand;
+import io.dropwizard.core.setup.Bootstrap;
+import io.dropwizard.db.DatabaseConfiguration;
+import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.flyway.FlywayConfiguration;
 import io.dropwizard.flyway.FlywayFactory;
-import io.dropwizard.Configuration;
-import io.dropwizard.cli.ConfiguredCommand;
-import io.dropwizard.db.PooledDataSourceFactory;
-import io.dropwizard.db.DatabaseConfiguration;
-import io.dropwizard.setup.Bootstrap;
 import net.sourceforge.argparse4j.inf.Namespace;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.FlywayException;
