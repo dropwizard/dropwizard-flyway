@@ -8,7 +8,7 @@
     ":prConcurrentLimitNone",
     ":separatePatchReleases"
   ],
-  "baseBranches": ["master", "2.1.x", "3.0.x", "4.0.x"],
+  "baseBranches": ["2.1.x", "3.0.x", "4.0.x"],
   "dependencyDashboard": true,
   "labels": ["dependencies"],
   "platformAutomerge": true,
