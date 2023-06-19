@@ -188,6 +188,10 @@ Additionally you can override the following configuration settings of Flyway usi
       # which using the defaults translates to U1.1__My_description.sql
       undoSqlMigrationPrefix: U
 
+      # The map of <flywaySetting, appliedValue> to overwrite any existing configuration. (default: empty map)
+      # Properties are documented here: https://documentation.red-gate.com/fd/parameters-184127474.html
+      configuration:
+
 
 
 Maven Artifacts

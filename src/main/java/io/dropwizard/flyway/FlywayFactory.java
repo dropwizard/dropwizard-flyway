@@ -115,6 +115,10 @@ public class FlywayFactory {
     @Nullable
     private String undoSqlMigrationPrefix;
 
+    @JsonProperty
+    @Nullable
+    Map<String, String> configuration = Collections.emptyMap();
+
     /**
      * @see FluentConfiguration#getEncoding()
      */
@@ -629,6 +633,23 @@ public class FlywayFactory {
         this.undoSqlMigrationPrefix = undoSqlMigrationPrefix;
     }
 
+    /**
+     * @see FluentConfiguration#configuration(Map)
+     */
+    public Map<String, String> getConfiguration() {
+        return configuration;
+    }
+
+    /**
+     * Configures Flyway with these properties.
+     * This overwrites any existing configuration.
+     * Properties are documented here: https://documentation.red-gate.com/fd/parameters-184127474.html
+     * @param configuration
+     */
+    public void setConfiguration(Map<String, String> configuration) {
+        this.configuration = configuration;
+    }
+
     public Flyway build(final String url, final String user, final String password) {
         return createConfiguration().dataSource(url, user, password).load();
     }
@@ -646,6 +667,7 @@ public class FlywayFactory {
               .callbacks(callbacks.toArray(emptyStringArray))
               .cleanDisabled(cleanDisabled)
               .cleanOnValidationError(cleanOnValidationError)
+              .configuration(configuration)
               .encoding(encoding)
               .group(group)
               .ignoreMigrationPatterns(ignoreMigrationPatterns.toArray(emptyStringArray))
