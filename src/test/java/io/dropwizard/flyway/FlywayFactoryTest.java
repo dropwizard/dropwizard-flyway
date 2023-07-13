@@ -4,32 +4,37 @@ import com.google.common.collect.ImmutableMap;
 import jakarta.validation.constraints.NotNull;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.internal.database.postgresql.PostgreSQLConfigurationExtension;
+import org.h2.jdbcx.JdbcDataSource;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.sql.DataSource;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-@ExtendWith(MockitoExtension.class)
 public class FlywayFactoryTest {
 
-    @Mock
-    private DataSource mockDataSource;
+    private JdbcDataSource dataSource;
+
+    @BeforeEach
+    void setUp() throws SQLException {
+        dataSource = new JdbcDataSource();
+        dataSource.setURL("jdbc:h2:mem:testdb");
+        dataSource.setUser("sa");
+    }
 
     @Test
     public void defaultConfigurationShouldBeValid() {
         final FlywayFactory factory = new FlywayFactory();
-        final Flyway flyway = factory.build(mockDataSource);
+
+        final Flyway flyway = factory.build(dataSource);
 
         assertNotNull(flyway);
-        assertSame(mockDataSource, flyway.getConfiguration().getDataSource());
+        assertSame(dataSource, flyway.getConfiguration().getDataSource());
         assertEquals(StandardCharsets.UTF_8, flyway.getConfiguration().getEncoding());
         assertEquals("flyway_schema_history", flyway.getConfiguration().getTable());
         assertEquals(0, flyway.getConfiguration().getSchemas().length);
@@ -37,7 +42,7 @@ public class FlywayFactoryTest {
 
     @Test
     public void checkConfigurationWithOverridedSetting() {
-        Flyway flyway = new FlywayFactory().build(mockDataSource);
+        Flyway flyway = new FlywayFactory().build(dataSource);
         assertNotNull(flyway);
 
         boolean transactionalLockDefault = getPostgresTransactionLockSettings(flyway);
@@ -46,7 +51,7 @@ public class FlywayFactoryTest {
         final FlywayFactory factory = new FlywayFactory();
         Map<String, String> configuration = ImmutableMap.of("flyway.postgresql.transactional.lock", String.valueOf(transactionalLockOverrided));
         factory.setConfiguration(configuration);
-        flyway =  factory.build(mockDataSource);
+        flyway =  factory.build(dataSource);
 
         assertNotNull(flyway);
         assertEquals(StandardCharsets.UTF_8, flyway.getConfiguration().getEncoding());          // default value
