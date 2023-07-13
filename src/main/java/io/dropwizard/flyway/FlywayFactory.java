@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
+import org.flywaydb.database.oracle.OracleConfigurationExtension;
 
 import javax.annotation.Nullable;
 import javax.sql.DataSource;
@@ -574,7 +575,7 @@ public class FlywayFactory {
     }
 
     /**
-     * @see FluentConfiguration#isOracleSqlplus()
+     * @see OracleConfigurationExtension#getSqlplus()
      */
     @Nullable
     public Boolean isOracleSqlPlus() {
@@ -582,7 +583,7 @@ public class FlywayFactory {
     }
 
     /**
-     * @see FluentConfiguration#oracleSqlplus(boolean)
+     * @see OracleConfigurationExtension#setSqlplus(Boolean)
      */
     public void setOracleSqlPlus(@Nullable Boolean oracleSqlPlus) {
         this.oracleSqlPlus = oracleSqlPlus;
@@ -705,7 +706,9 @@ public class FlywayFactory {
             flyway.errorOverrides(errorOverrides.toArray(emptyStringArray));
         }
         if (oracleSqlPlus != null) {
-            flyway.oracleSqlplus(oracleSqlPlus);
+            OracleConfigurationExtension oracleConfigurationExtension =
+                    flyway.getPluginRegister().getPlugin(OracleConfigurationExtension.class);
+            oracleConfigurationExtension.setSqlplus(oracleSqlPlus);
         }
         if (stream != null) {
             flyway.stream(stream);
