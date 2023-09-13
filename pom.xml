@@ -70,7 +70,7 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
         <dropwizard.version>4.0.1</dropwizard.version>
-        <flyway.version>9.22.0</flyway.version>
+        <flyway.version>9.22.1</flyway.version>
     </properties>
 
     <dependencyManagement>
