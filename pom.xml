@@ -68,7 +68,7 @@
         <sonar.organization>dropwizard</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
-        <dropwizard.version>3.0.3</dropwizard.version>
+        <dropwizard.version>3.0.4</dropwizard.version>
         <flyway.version>9.22.3</flyway.version>
     </properties>
 
