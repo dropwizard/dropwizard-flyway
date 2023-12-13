@@ -2,14 +2,8 @@ name: Build
 on:
   pull_request:
     branches:
-    - 2.1.x
-    - 3.0.x
-    - 4.0.x
-  push:
-    branches:
-    - 2.1.x
-    - 3.0.x
-    - 4.0.x
+    - release/*
+  pull_request:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
