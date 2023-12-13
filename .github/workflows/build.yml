@@ -1,43 +1,20 @@
+---
 name: Build
+# yamllint disable-line rule:truthy
 on:
-  pull_request:
+  push:
     branches:
-    - release/*
+      - release/*
   pull_request:
 jobs:
+  yamllint:
+    uses: dropwizard/workflows/.github/workflows/yamllint.yml@main
   build:
-    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        java_version: ['11', '17']
-        os: ['ubuntu-latest']
-    env:
-      JAVA_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
-    steps:
-    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-      with:
-        fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-    - name: Set up JDK
-      uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4
-      with:
-        distribution: 'temurin'
-        java-version: ${{ matrix.java_version }}
-        cache: 'maven'
-    - name: Cache SonarCloud packages
-      if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.java_version == '11' }}
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
-      with:
-        path: ~/.sonar/cache
-        key: ${{ runner.os }}-sonar
-        restore-keys: ${{ runner.os }}-sonar
-    - name: Build
-      run: ./mvnw -B -V -ntp install
-    - name: Analyze with SonarCloud
-      if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.java_version == '11' }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: ./mvnw -B -V -ntp org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        java-version: ['11', '17', '21']
+    uses: dropwizard/workflows/.github/workflows/maven.yml@main
+    secrets: inherit
+    with:
+      java-version: ${{ matrix.java-version }}
