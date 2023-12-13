@@ -1,0 +1,22 @@
+---
+# yamllint disable rule:comments rule:line-length
+name: Trigger Release
+# yamllint disable-line rule:truthy
+on:
+  workflow_dispatch:
+    inputs:
+      releaseVersion:
+        description: Version of the next release
+        required: true
+        type: string
+      developmentVersion:
+        description: Version of the next development cycle (must end in "-SNAPSHOT")
+        required: true
+        type: string
+jobs:
+  release:
+    uses: dropwizard/workflows/.github/workflows/trigger-release.yml@main
+    secrets: inherit
+    with:
+      releaseVersion: ${{ inputs.releaseVersion }}
+      developmentVersion: ${{ inputs.developmentVersion }}

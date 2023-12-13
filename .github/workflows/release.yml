@@ -1,29 +1,11 @@
+---
 name: Release
+# yamllint disable-line rule:truthy
 on:
   push:
     tags:
-    - dropwizard-flyway-*
+      - dropwizard-flyway-*
 jobs:
   release:
-    runs-on: 'ubuntu-latest'
-    env:
-      JAVA_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
-    steps:
-    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-    - name: Set up JDK
-      uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4
-      with:
-        distribution: 'temurin'
-        java-version: '8'
-        cache: 'maven'
-        server-id: ossrh
-        server-username: CI_DEPLOY_USERNAME
-        server-password: CI_DEPLOY_PASSWORD
-        gpg-passphrase: GPG_PASSPHRASE
-        gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-    - name: Build and Deploy
-      run: ./mvnw -B -V -ntp -Prelease deploy
-      env:
-        CI_DEPLOY_USERNAME: ${{ secrets.CI_DEPLOY_USERNAME }}
-        CI_DEPLOY_PASSWORD: ${{ secrets.CI_DEPLOY_PASSWORD }}
-        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+    uses: dropwizard/workflows/.github/workflows/release.yml@main
+    secrets: inherit
