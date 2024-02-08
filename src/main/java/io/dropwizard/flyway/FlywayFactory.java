@@ -10,16 +10,24 @@ import javax.sql.DataSource;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 public class FlywayFactory {
     @JsonProperty
     @NotEmpty
     private String encoding = StandardCharsets.UTF_8.name();
+    @JsonProperty
+    @PositiveOrZero
+    private int connectRetries = 0;
+    @JsonProperty
+    @PositiveOrZero
+    private int connectRetriesInterval = 120;
     @JsonProperty
     @Nullable
     private String defaultSchema = null;
@@ -109,7 +117,7 @@ public class FlywayFactory {
     @Nullable
     private String target;
     @JsonProperty
-    @Nullable
+    @NotNull
     Map<String, String> configuration = Collections.emptyMap();
 
     /**
@@ -124,6 +132,34 @@ public class FlywayFactory {
      */
     public void setEncoding(final String encoding) {
         this.encoding = encoding;
+    }
+
+    /**
+     * @see FluentConfiguration#getConnectRetries()
+     */
+    public int getConnectRetries() {
+        return connectRetries;
+    }
+
+    /**
+     * @see FluentConfiguration#connectRetries(int)
+     */
+    public void setConnectRetries(int connectRetries) {
+        this.connectRetries = connectRetries;
+    }
+
+    /**
+     * @see FluentConfiguration#getConnectRetriesInterval()
+     */
+    public int getConnectRetriesInterval() {
+        return connectRetriesInterval;
+    }
+
+    /**
+     * @see FluentConfiguration#connectRetriesInterval(int)
+     */
+    public void setConnectRetriesInterval(int connectRetriesInterval) {
+        this.connectRetriesInterval = connectRetriesInterval;
     }
 
     /**
@@ -606,8 +642,8 @@ public class FlywayFactory {
     /**
      * Configures Flyway with these properties.
      * This overwrites any existing configuration.
-     * Properties are documented here: https://documentation.red-gate.com/fd/parameters-184127474.html
-     * @param configuration
+     *
+     * @see <a href="https://documentation.red-gate.com/fd/parameters-224919673.html">Configuration parameters</a>
      */
     public void setConfiguration(Map<String, String> configuration) {
         this.configuration = configuration;
@@ -631,6 +667,8 @@ public class FlywayFactory {
               .cleanDisabled(cleanDisabled)
               .cleanOnValidationError(cleanOnValidationError)
               .configuration(configuration)
+              .connectRetries(connectRetries)
+              .connectRetriesInterval(connectRetriesInterval)
               .encoding(encoding)
               .group(group)
               .ignoreMigrationPatterns(ignoreMigrationPatterns.toArray(emptyStringArray))
