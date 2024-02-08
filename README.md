@@ -55,6 +55,12 @@ Additionally, you can override the following configuration settings of Flyway us
       # The encoding of SQL migrations. (default: UTF-8) 
       encoding: UTF-8
 
+      # The maximum number of retries when attempting to connect to the database. (default: 0)
+      connectRetries: 0
+
+      # The maximum time between retries when attempting to connect to the database in seconds. (default: 120)
+      connectRetriesInterval: 120
+
       # The default schema managed by Flyway. (default: the first schema listed in schemas)
       defaultSchema:
       
