@@ -3,7 +3,7 @@ package io.dropwizard.flyway;
 import com.google.common.collect.ImmutableMap;
 import jakarta.validation.constraints.NotNull;
 import org.flywaydb.core.Flyway;
-import org.flywaydb.core.internal.database.postgresql.PostgreSQLConfigurationExtension;
+import org.flywaydb.database.postgresql.PostgreSQLConfigurationExtension;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

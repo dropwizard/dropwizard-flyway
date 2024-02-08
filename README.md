@@ -1,7 +1,7 @@
 Dropwizard Flyway
 =================
 
-[![Build](https://github.com/dropwizard/dropwizard-flyway/workflows/Build/badge.svg)](https://github.com/dropwizard/dropwizard-flyway/actions?query=workflow%3ABuild)
+[![Build](https://github.com/dropwizard/dropwizard-flyway/actions/workflows/build.yml/badge.svg)](https://github.com/dropwizard/dropwizard-flyway/actions/workflows/build.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dropwizard_dropwizard-flyway&metric=alert_status)](https://sonarcloud.io/dashboard?id=dropwizard_dropwizard-flyway)
 [![Maven Central](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway.svg)](https://search.maven.org/artifact/io.dropwizard.modules/dropwizard-flyway)
 
@@ -11,7 +11,7 @@ Dropwizard Flyway
 Usage
 -----
 
-Just add the `FlywayBundle` to your Dropwizard application inside the [`Application#initialize`](https://javadoc.io/static/io.dropwizard/dropwizard-core/2.0.0/io/dropwizard/Application.html#initialize-io.dropwizard.setup.Bootstrap-) method.
+Just add the `FlywayBundle` to your Dropwizard application inside the [`Application#initialize`](https://javadoc.io/static/io.dropwizard/dropwizard-core/4.0.0/io/dropwizard/core/Application.html#initialize(io.dropwizard.core.setup.Bootstrap) method.
 
     @Override
     public void initialize(Bootstrap<MyConfiguration> bootstrap) {
@@ -47,9 +47,9 @@ The [Flyway migrations](http://flywaydb.org/documentation/migration/) must be ac
 Configuration
 -------------
 
-`dropwizard-flyway` is using the standard [DataSourceFactory](https://javadoc.io/static/io.dropwizard/dropwizard-db/2.0.0/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](https://javadoc.io/doc/io.dropwizard/dropwizard-db/2.0.0/index.html) for configuring its [DataSource](http://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html).
+`dropwizard-flyway` is using the standard [DataSourceFactory](https://javadoc.io/static/io.dropwizard/dropwizard-db/4.0.0/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](https://javadoc.io/doc/io.dropwizard/dropwizard-db/4.0.0/index.html) for configuring its [DataSource](http://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html).
 
-Additionally you can override the following configuration settings of Flyway using [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/2.0.0-1/apidocs/io/dropwizard/flyway/FlywayFactory.html):
+Additionally, you can override the following configuration settings of Flyway using [FlywayFactory](https://dropwizard.github.io/dropwizard-flyway/2.0.0-1/apidocs/io/dropwizard/flyway/FlywayFactory.html):
 
     flyway:
       # The encoding of SQL migrations. (default: UTF-8) 
@@ -120,7 +120,7 @@ Additionally you can override the following configuration settings of Flyway usi
       
       # Ignore migrations that match this list of patterns when validating migrations.
       # Each pattern is of the form described type:status with * matching type or status.
-      # Please refer to https://flywaydb.org/documentation/configuration/parameters/ignoreMigrationPatterns for details. 
+      # Please refer to https://documentation.red-gate.com/fd/flyway-cli-and-api/configuration/parameters/flyway/ignore-migration-patterns for details. 
       # Example: repeatable:missing,versioned:pending,*:failed (default: *:future)
       ignoreMigrationPatterns: 
         - "*:future"
@@ -143,7 +143,11 @@ Additionally you can override the following configuration settings of Flyway usi
       # If set to true, default built-in resolvers (jdbc, spring-jdbc and sql) are skipped and only custom resolvers as
       # defined by 'resolvers' are used. (default: false)
       skipDefaultResolvers: false
-      
+
+      # The map of <flywaySetting, appliedValue> to overwrite any existing configuration. (default: empty map)
+      # Properties are documented here: https://documentation.red-gate.com/fd/parameters-224919673.html
+      configuration:
+
       #### COMMERCIAL FEATURES
       # (Flyway Pro and Flyway Enterprise only)
       
@@ -172,37 +176,22 @@ Additionally you can override the following configuration settings of Flyway usi
       # the following errorOverride can be used: 99999:17110:E
       #errorOverrides:
       
-      # Whether to Flyway's support for Oracle SQL*Plus commands should be activated. (default: false)
-      oracleSqlPlus: false
-      
       # Whether to stream SQL migrations when executing them. (default: false)
       stream: false
       
       # Target version up to which Flyway should consider migrations.
       # The special value 'current' designates the current version of the schema. (default: <<latest version>>)
       #target:
-      
-      # The file name prefix for undo SQL migrations. (default: U)
-      # Undo SQL migrations are responsible for undoing the effects of the versioned migration with the same version.
-      # They have the following file name structure: prefixVERSIONseparatorDESCRIPTIONsuffix ,
-      # which using the defaults translates to U1.1__My_description.sql
-      undoSqlMigrationPrefix: U
-
-      # The map of <flywaySetting, appliedValue> to overwrite any existing configuration. (default: empty map)
-      # Properties are documented here: https://documentation.red-gate.com/fd/parameters-184127474.html
-      configuration:
-
 
 
 Maven Artifacts
 ---------------
 
-![dropwizard-flyway 1.3.x](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway/1.3)
-![dropwizard-flyway 2.0.x](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway/2.0)
 ![dropwizard-flyway 2.1.x](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway/2.1)
+![dropwizard-flyway 3.0.x](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway/3.0)
+![dropwizard-flyway 4.0.x](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-flyway/4.0)
 
 This project is available on Maven Central. To add it to your project simply add the following dependencies to your `pom.xml`:
-
 
     <dependency>
       <groupId>io.dropwizard.modules</groupId>
@@ -210,6 +199,24 @@ This project is available on Maven Central. To add it to your project simply add
       <version>${dropwizard-flyway.version}</version>
     </dependency>
 
+Please note that you will need to add the respective Flyway database support artifacts and configure them via the `flyway.configuration` map.
+
+Example:
+
+Add Flyway PostgreSQL dependency to your POM:
+
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-database-postgresql</artifactId>
+      <version>${flyway.version}</version>
+    </dependency>
+
+Add the configuration setting to your `flyway.configuration` block:
+
+    flyway:
+      configuration:
+        # PostgreSQL Transactional Lock, see https://documentation.red-gate.com/fd/postgresql-transactional-lock-224919738.html
+        flyway.postgresql.transactional.lock: false
 
 Support
 -------
@@ -220,7 +227,7 @@ Please file bug reports and feature requests in [GitHub issues](https://github.c
 License
 -------
 
-Copyright (c) 2014-2020 Jochen Schalanda, Dropwizard Team
+Copyright (c) 2014-2024 Jochen Schalanda, Dropwizard Team
 
 This library is licensed under the Apache License, Version 2.0.
 

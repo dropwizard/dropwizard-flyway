@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
-import org.flywaydb.database.oracle.OracleConfigurationExtension;
 
 import javax.sql.DataSource;
 import java.io.File;
@@ -105,17 +104,10 @@ public class FlywayFactory {
     private List<String> errorOverrides;
     @JsonProperty
     @Nullable
-    private Boolean oracleSqlPlus;
-    @JsonProperty
-    @Nullable
     private Boolean stream;
     @JsonProperty
     @Nullable
     private String target;
-    @JsonProperty
-    @Nullable
-    private String undoSqlMigrationPrefix;
-
     @JsonProperty
     @Nullable
     Map<String, String> configuration = Collections.emptyMap();
@@ -575,21 +567,6 @@ public class FlywayFactory {
     }
 
     /**
-     * @see OracleConfigurationExtension#getSqlplus()
-     */
-    @Nullable
-    public Boolean isOracleSqlPlus() {
-        return oracleSqlPlus;
-    }
-
-    /**
-     * @see OracleConfigurationExtension#setSqlplus(Boolean)
-     */
-    public void setOracleSqlPlus(@Nullable Boolean oracleSqlPlus) {
-        this.oracleSqlPlus = oracleSqlPlus;
-    }
-
-    /**
      * @see FluentConfiguration#isStream()
      */
     @Nullable
@@ -617,21 +594,6 @@ public class FlywayFactory {
      */
     public void setTarget(@Nullable String target) {
         this.target = target;
-    }
-
-    /**
-     * @see FluentConfiguration#getUndoSqlMigrationPrefix()
-     */
-    @Nullable
-    public String getUndoSqlMigrationPrefix() {
-        return undoSqlMigrationPrefix;
-    }
-
-    /**
-     * @see FluentConfiguration#undoSqlMigrationPrefix(String)
-     */
-    public void setUndoSqlMigrationPrefix(@Nullable String undoSqlMigrationPrefix) {
-        this.undoSqlMigrationPrefix = undoSqlMigrationPrefix;
     }
 
     /**
@@ -705,19 +667,11 @@ public class FlywayFactory {
         if (errorOverrides != null) {
             flyway.errorOverrides(errorOverrides.toArray(emptyStringArray));
         }
-        if (oracleSqlPlus != null) {
-            OracleConfigurationExtension oracleConfigurationExtension =
-                    flyway.getPluginRegister().getPlugin(OracleConfigurationExtension.class);
-            oracleConfigurationExtension.setSqlplus(oracleSqlPlus);
-        }
         if (stream != null) {
             flyway.stream(stream);
         }
         if (target != null) {
             flyway.target(target);
-        }
-        if (undoSqlMigrationPrefix != null) {
-            flyway.undoSqlMigrationPrefix(undoSqlMigrationPrefix);
         }
 
         return flyway;
