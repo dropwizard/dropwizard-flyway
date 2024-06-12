@@ -15,7 +15,7 @@ public class DbMigrateCommandTest extends AbstractCommandTest {
 
     @BeforeEach
     void setUpFlyway() {
-        migrateResult = new MigrateResult(VersionPrinter.getVersion(), "db", "schema");
+        migrateResult = new MigrateResult(VersionPrinter.getVersion(), "db", "schema", "PostgreSQL");
         migrateResult.initialSchemaVersion = "initial";
         migrateResult.targetSchemaVersion = "target";
         migrateResult.migrationsExecuted = 23;
