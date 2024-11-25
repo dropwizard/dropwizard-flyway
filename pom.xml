@@ -7,7 +7,7 @@
         <version>4.0.3</version>
     </parent>
     <artifactId>dropwizard-flyway</artifactId>
-    <version>4.0.0-6</version>
+    <version>4.0.0-7-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Dropwizard Flyway Bundle</name>
@@ -96,8 +96,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-  <scm>
-    <tag>dropwizard-flyway-4.0.0-6</tag>
-  </scm>
 </project>
