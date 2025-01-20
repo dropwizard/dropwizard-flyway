@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.dropwizard.modules</groupId>
         <artifactId>module-parent</artifactId>
-        <version>3.0.3</version>
+        <version>3.0.4</version>
     </parent>
     <artifactId>dropwizard-flyway</artifactId>
     <version>3.0.1-3-SNAPSHOT</version>
