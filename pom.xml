@@ -31,7 +31,7 @@
     <properties>
         <sonar.projectKey>dropwizard_dropwizard-flyway</sonar.projectKey>
 
-        <flyway.version>11.10.1</flyway.version>
+        <flyway.version>11.10.2</flyway.version>
     </properties>
 
     <dependencies>
