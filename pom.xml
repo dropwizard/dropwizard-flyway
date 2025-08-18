@@ -34,6 +34,18 @@
         <flyway.version>11.11.1</flyway.version>
     </properties>
 
+    <dependencyManagement>
+      <dependencies>
+        <dependency>
+          <groupId>io.dropwizard.flywaydb</groupId>
+          <artifactId>flyway-bom</artifactId>
+          <version>${flyway.version}</version>
+          <type>pom</type>
+          <scope>import</scope>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>io.dropwizard</groupId>
@@ -50,7 +62,6 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>${flyway.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
