@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
 
@@ -29,7 +28,6 @@ public class FlywayFactory {
     @PositiveOrZero
     private int connectRetriesInterval = 120;
     @JsonProperty
-    @Nullable
     private String defaultSchema = null;
     @JsonProperty
     @NotNull
@@ -102,19 +100,14 @@ public class FlywayFactory {
 
     // Commercial Features
     @JsonProperty
-    @Nullable
     private Boolean batch;
     @JsonProperty
-    @Nullable
     private File dryRunOutputFile;
     @JsonProperty
-    @Nullable
     private List<String> errorOverrides;
     @JsonProperty
-    @Nullable
     private Boolean stream;
     @JsonProperty
-    @Nullable
     private String target;
     @JsonProperty
     @NotNull
@@ -165,7 +158,6 @@ public class FlywayFactory {
     /**
      * @see FluentConfiguration#getDefaultSchema()
      */
-    @Nullable
     public String getDefaultSchema() {
         return defaultSchema;
     }
@@ -173,7 +165,7 @@ public class FlywayFactory {
     /**
      * @see FluentConfiguration#defaultSchema(String)
      */
-    public void setDefaultSchema(@Nullable final String defaultSchema) {
+    public void setDefaultSchema(final String defaultSchema) {
         this.defaultSchema = defaultSchema;
     }
 
@@ -560,7 +552,6 @@ public class FlywayFactory {
     /**
      * @see FluentConfiguration#isBatch()
      */
-    @Nullable
     public Boolean isBatch() {
         return batch;
     }
@@ -568,14 +559,13 @@ public class FlywayFactory {
     /**
      * @see FluentConfiguration#batch(boolean)
      */
-    public void setBatch(@Nullable Boolean batch) {
+    public void setBatch(Boolean batch) {
         this.batch = batch;
     }
 
     /**
      * @see FluentConfiguration#getDryRunOutput()
      */
-    @Nullable
     public File getDryRunOutputFile() {
         return dryRunOutputFile;
     }
@@ -583,14 +573,13 @@ public class FlywayFactory {
     /**
      * @see FluentConfiguration#dryRunOutput(File)
      */
-    public void setDryRunOutputFile(@Nullable File dryRunOutputFile) {
+    public void setDryRunOutputFile(File dryRunOutputFile) {
         this.dryRunOutputFile = dryRunOutputFile;
     }
 
     /**
      * @see FluentConfiguration#getErrorOverrides()
      */
-    @Nullable
     public List<String> getErrorOverrides() {
         return errorOverrides;
     }
@@ -598,14 +587,13 @@ public class FlywayFactory {
     /**
      * @see FluentConfiguration#errorOverrides(String...)
      */
-    public void setErrorOverrides(@Nullable List<String> errorOverrides) {
+    public void setErrorOverrides(List<String> errorOverrides) {
         this.errorOverrides = errorOverrides;
     }
 
     /**
      * @see FluentConfiguration#isStream()
      */
-    @Nullable
     public Boolean isStream() {
         return stream;
     }
@@ -613,14 +601,13 @@ public class FlywayFactory {
     /**
      * @see FluentConfiguration#stream(boolean)
      */
-    public void setStream(@Nullable Boolean stream) {
+    public void setStream(Boolean stream) {
         this.stream = stream;
     }
 
     /**
      * @see FluentConfiguration#getTarget()
      */
-    @Nullable
     public String getTarget() {
         return target;
     }
@@ -628,7 +615,7 @@ public class FlywayFactory {
     /**
      * @see FluentConfiguration#target(String)
      */
-    public void setTarget(@Nullable String target) {
+    public void setTarget(String target) {
         this.target = target;
     }
 
