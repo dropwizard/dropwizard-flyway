@@ -7,5 +7,5 @@ on:
       - dropwizard-flyway-*
 jobs:
   release:
-    uses: dropwizard/workflows/.github/workflows/release.yml@main
+    uses: dropwizard/workflows/.github/workflows/release.yml@91afe30da07f7fc632020064a53f2c5ac0f4be9b # main
     secrets: inherit
