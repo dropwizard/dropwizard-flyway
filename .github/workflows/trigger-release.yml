@@ -15,7 +15,7 @@ on:
         type: string
 jobs:
   release:
-    uses: dropwizard/workflows/.github/workflows/trigger-release.yml@608d5ce4a4b37f79f5acceae7c6598f5f548e12a # main
+    uses: dropwizard/workflows/.github/workflows/trigger-release.yml@0e920ffd2f8565385330680332f6152de022e065 # main
     secrets: inherit
     with:
       releaseVersion: ${{ inputs.releaseVersion }}
