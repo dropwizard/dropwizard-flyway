@@ -8,13 +8,13 @@ on:
   pull_request:
 jobs:
   yamllint:
-    uses: dropwizard/workflows/.github/workflows/yamllint.yml@0ec34841b1d93de4fccd86a3a9112f331a65a01f # main
+    uses: dropwizard/workflows/.github/workflows/yamllint.yml@bf2e023abf49088f77953cac78fb30a7b0a64720 # main
   build:
     strategy:
       fail-fast: false
       matrix:
         java-version: ['17', '21']
-    uses: dropwizard/workflows/.github/workflows/maven.yml@0ec34841b1d93de4fccd86a3a9112f331a65a01f # main
+    uses: dropwizard/workflows/.github/workflows/maven.yml@bf2e023abf49088f77953cac78fb30a7b0a64720 # main
     secrets: inherit
     with:
       java-version: ${{ matrix.java-version }}
